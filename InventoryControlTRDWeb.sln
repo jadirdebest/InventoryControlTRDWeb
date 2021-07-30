@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31410.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryControlTRDWeb", "InventoryControlTRDWeb\InventoryControlTRDWeb.csproj", "{360148D6-4E7A-4A0E-A957-82D50D2EA962}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02 - Infra", "02 - Infra", "{1FC51185-A022-43B0-9B7F-8D1506F56882}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03 - Domain", "03 - Domain", "{A0244D04-C0CE-4DD2-A5C5-0FB3BE7F252B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01 - CrossCutting", "01 - CrossCutting", "{1C251A09-92BA-4F45-BD77-8076406E4BD1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04 - ApplicationServices", "04 - ApplicationServices", "{4AD8DDC7-C6D3-4733-8AF3-977093841205}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05 - Application", "05 - Application", "{64D8EC18-CE93-4F5D-A24C-21BAD90385D5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{360148D6-4E7A-4A0E-A957-82D50D2EA962}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{360148D6-4E7A-4A0E-A957-82D50D2EA962}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{360148D6-4E7A-4A0E-A957-82D50D2EA962}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{360148D6-4E7A-4A0E-A957-82D50D2EA962}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{360148D6-4E7A-4A0E-A957-82D50D2EA962} = {64D8EC18-CE93-4F5D-A24C-21BAD90385D5}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F89B2074-0641-44B5-9814-A84B8FE12F71}
+	EndGlobalSection
+EndGlobal
