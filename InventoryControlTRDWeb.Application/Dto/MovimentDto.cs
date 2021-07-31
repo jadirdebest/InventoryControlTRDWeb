@@ -1,4 +1,4 @@
-﻿using InventoryControlTRD.Domain.Models.Enums;
+﻿using InventoryControlTRDWeb.Application.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;

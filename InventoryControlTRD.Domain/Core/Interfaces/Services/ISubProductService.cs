@@ -1,0 +1,12 @@
+﻿using InventoryControlTRD.Domain.Models;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace InventoryControlTRD.Domain.Core.Interfaces.Services
+{
+    public interface ISubProductService : IBaseService<SubProduct>
+    {
+        Task<IEnumerable<SubProduct>> GetSubProductsByProductIdAsync(Guid id);
+    }
+}

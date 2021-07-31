@@ -8,7 +8,7 @@ namespace InventoryControlTRD.Infrastructure.Configurations
 {
     class Connection
     {
-        public static string SqlConnectionString { get => "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\jadir\\source\\repos\\TesteEditoraLivros\\TesteEditoraLivros.Infrastructure\\DataBase\\DatabaseTeste.mdf;Integrated Security=True"; }
+        public static string SqlConnectionString { get => @"Data Source=MuServer-PC;Initial Catalog=GeneralDB;Persist Security Info=True;User ID=sa;Password=!nformac@0"; }
 
 
         //Usar singleton aqui

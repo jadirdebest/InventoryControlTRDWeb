@@ -1,0 +1,37 @@
+﻿@model InventoryControlTRDWeb.Areas.Client.Models.SubProductViewModel
+
+@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Areas/Client/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Add</h1>
+
+<div>
+    <h4>SubProductViewModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Product.Name)
+        </dt>
+        <dd class = "col-sm-10">
+           @Model.Product.Name
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SubProductId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SubProductId)
+        </dd>
+    </dl>
+    <button class="btn btn-success">Novo SubProduto</button>
+    <table class="table">
+        <tr>
+            <th>Sub Produto</th>
+        </tr>
+    </table>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

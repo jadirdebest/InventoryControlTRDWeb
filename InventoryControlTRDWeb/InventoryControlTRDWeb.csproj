@@ -5,8 +5,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\InventoryControlTRD.CrossCutting\InventoryControlTRD.CrossCutting.csproj" />
     <ProjectReference Include="..\InventoryControlTRDWeb.Application\InventoryControlTRDWeb.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Client\Data\" />
+    <Folder Include="Areas\Client\Models\SubProduct\" />
   </ItemGroup>
 
 </Project>

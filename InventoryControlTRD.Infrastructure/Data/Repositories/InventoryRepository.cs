@@ -35,7 +35,7 @@ namespace InventoryControlTRD.Infrastructure.Data.Repositories
             return _data.QueryAsync(@"select * from Inventory");
         }
 
-        public Task<Inventory> GetByIdAsync(int id)
+        public Task<Inventory> GetByIdAsync(Guid id)
         {
             return _data.QuerySingleAsync(@"select * from Inventory where Id = @ID ", new { @ID = id });
         }

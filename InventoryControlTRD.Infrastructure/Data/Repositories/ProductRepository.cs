@@ -3,8 +3,6 @@ using InventoryControlTRD.Domain.Models;
 using InventoryControlTRD.Infrastructure.Data.Core;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace InventoryControlTRD.Infrastructure.Data.Repositories
@@ -13,39 +11,37 @@ namespace InventoryControlTRD.Infrastructure.Data.Repositories
     {
         private IDataCore<Product> _data;
 
-        /*
-          public Guid ProductId { get; set; }
-        public int Ammout { get; set; }
-        public int Min { get; set; }
-        public int Max { get; set; }
-         */
         public ProductRepository(IDataCore<Product> data)
         {
             _data = data;
         }
-        public void AddAsync(Product obj)
+        public async void AddAsync(Product obj)
         {
-            throw new NotImplementedException();
+            obj.Id = Guid.NewGuid();
+            await _data.ExecuteAsync(@"insert into Product(Id,Name,CostPrice,SalePrice,Type,Actived) values(@Id,@Name,@CostPrice,@SalePrice,@Type,@Actived)",obj);
         }
-
         public Task<IEnumerable<Product>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return _data.QueryAsync(@"select * from Product");
         }
-
-        public Task<Product> GetByIdAsync(int id)
+        public Task<Product> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return _data.QuerySingleAsync(@"select * from Product where Id = @Id", new { Id = id });
         }
-
-        public void RemoveAsync(Product obj)
+        public async void RemoveAsync(Product obj)
         {
-            throw new NotImplementedException();
+            await _data.ExecuteAsync("delete from Product where Id = @Id", obj);
         }
-
-        public void UpdateAsync(Product obj)
+        public async void UpdateAsync(Product obj)
         {
-            throw new NotImplementedException();
+            await _data.ExecuteAsync(@"update Product 
+                                 set Name = @Name,
+                                     CostPrice = @CostPrice,
+                                     SalePrice = @SalePrice,
+                                     Type = @Type,
+                                     Actived = @Actived 
+                                     ModifiedOn = sysdatetime()
+                                 where Id = @Id" );
         }
     }
 }

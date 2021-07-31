@@ -5,12 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\InventoryControlTRD.Domain\InventoryControlTRD.Domain.csproj" />
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interface\" />
-    <Folder Include="Service\" />
+    <ProjectReference Include="..\InventoryControlTRD.Domain\InventoryControlTRD.Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -12,6 +12,7 @@ namespace InventoryControlTRD.Infrastructure.Data.Core
         Task<IEnumerable<T>> QueryAsync(string query, object obj);
         Task<T> QuerySingleAsync(string query, object obj);
         Task ExecuteAsync(string query);
+        void Execute(string query,object obj);
         Task ExecuteAsync(string query,object obj);
     }
 }

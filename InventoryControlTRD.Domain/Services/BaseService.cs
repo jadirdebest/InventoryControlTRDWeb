@@ -17,7 +17,7 @@ namespace InventoryControlTRD.Domain.Services
             _repo = repo;
         }
 
-        public virtual void AddAsync(T obj)
+        public virtual void Add(T obj)
         {
             _repo.AddAsync(obj);
         }
@@ -27,17 +27,17 @@ namespace InventoryControlTRD.Domain.Services
             return _repo.GetAllAsync();
         }
 
-        public virtual Task<T> GetByIdAsync(int id)
+        public virtual Task<T> GetByIdAsync(Guid id)
         {
             return _repo.GetByIdAsync(id);
         }
 
-        public virtual void RemoveAsync(T obj)
+        public virtual void Remove(T obj)
         {
             _repo.RemoveAsync(obj);
         }
 
-        public virtual void UpdateAsync(T obj)
+        public virtual void Update(T obj)
         {
             _repo.UpdateAsync(obj);
         }
