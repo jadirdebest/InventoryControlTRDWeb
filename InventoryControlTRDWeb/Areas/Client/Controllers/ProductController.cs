@@ -38,8 +38,7 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
             
             try
             {
-                _productService.Save(
-                    new ProductDto(model.Id,model.Name,model.Composite,Decimal.Parse(model.CostPrice),Decimal.Parse(model.SalePrice),model.Active,model.Type));
+                _productService.Save(new ProductDto(model.Id,model.Name,model.Composite,Decimal.Parse(model.CostPrice),Decimal.Parse(model.SalePrice),model.Active,model.Type));
                 return RedirectToAction("List");
             }
             catch (Exception ex)

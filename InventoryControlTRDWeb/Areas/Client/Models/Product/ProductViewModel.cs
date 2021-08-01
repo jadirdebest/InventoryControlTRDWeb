@@ -10,13 +10,20 @@ namespace InventoryControlTRDWeb.Areas.Client.Models
     public class ProductViewModel
     {
         public Guid? Id { get; set; }
+
+        [Required(ErrorMessage = "Campo Obrigatório!")]
         public bool Active { get; set; }
+
+        [Required(ErrorMessage = "Campo Obrigatório!")]
+        [MaxLength(50,ErrorMessage = "Permitido no máximo 50 caracteres")]
         public string Name { get; set; }
+
+        [Required(ErrorMessage = "Campo Obrigatório!")]
         public bool Composite { get; set; }
 
-        [DataType(DataType.Currency)]
-        public string CostPrice { get; set; }
-        public string SalePrice { get; set; }
+
+        public string CostPrice { get; set; } = "0,00";
+        public string SalePrice { get; set; } = "0,00";
         public ProductType Type { get; set; }
 
         public ProductViewModel()

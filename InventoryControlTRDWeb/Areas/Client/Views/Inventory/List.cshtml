@@ -4,10 +4,11 @@
 }
 
 <div>
-    <h4>Inventory </h4>
+    <h4>Estoque</h4>
     <hr />
-    @Html.ActionLink("Novo Lançamento","Add","Inventory",null,new { @class = "btn btn-success" })
-    <table class="table">
+    @Html.ActionLink("Novo Lançamento","Add","Inventory",null,new { @class = "btn btn-success btn-sm",@style="margin-bottom:1em" })
+
+    <table class="table table-responsive-sm ">
         <thead>
             <tr>
                 <th>Produto</th>
@@ -29,5 +30,5 @@
 </div>
 <div>
     
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="List" asp-controller="Product">Voltar</a>
 </div> 

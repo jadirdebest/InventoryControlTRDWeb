@@ -1,0 +1,50 @@
+﻿@model InventoryOutReportViewModel
+@{
+    Layout = "_Layout";
+}
+
+
+<form asp-action="InventoryOutReport">
+
+    <div class="form-group">
+        <label>Data Inicial</label>
+        <input asp-for="StartDate" type="date" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Data Final</label>
+        <input asp-for="FinalDate"  type="date" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Gerar</button>
+</form>
+
+
+@if (Model != null)
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Qtde. Retirada do Estoque</th>
+                <th>Preço Custo Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var reportItem in Model.RequestReportList)
+            {
+                <tr>
+                    <td>@reportItem.ProductName</td>
+                    <td>@reportItem.Amount</td>
+                    <td>@reportItem.TotalCostPrice</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2">TOTAL</td>
+                <td>@(Model.RequestReportList.Sum(a => a.TotalCostPrice))</td>
+            </tr>
+        </tfoot>
+    </table>
+}
+

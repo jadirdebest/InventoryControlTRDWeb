@@ -27,7 +27,7 @@ namespace InventoryControlTRD.Infrastructure.Data.Repositories
                             new { StartDate = startDate, FinalDate = finalDate });
         }
 
-        public IEnumerable<Report> InventoryOutReport(DateTime startDate, DateTime finalDate)
+        public IEnumerable<Report> GetInventoryOutReport(DateTime startDate, DateTime finalDate)
         {
             return _data.Query(@"
              select x.Name, SUM(x.Amount) Amount, SUM(CostTotal) CostTotal , SUM(SaleTotal) SaleTotal from (

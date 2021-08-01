@@ -32,11 +32,22 @@ namespace InventoryControlTRDWeb.Areas.Manager.Controllers
                 throw;
             }
         }
-      
 
-        public IActionResult InventoryOutReport()
+        public IActionResult InventoryOutReport() => View();
+
+        [HttpPost]
+        public IActionResult InventoryOutReport(InventoryOutReportViewModel model)
         {
-            return View();
+            try
+            {
+                return View(new InventoryOutReportViewModel(_reportService.GetInventoryOutReport(model.StartDate, model.FinalDate)));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
     }
 }

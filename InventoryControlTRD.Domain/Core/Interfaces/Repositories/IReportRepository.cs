@@ -10,6 +10,6 @@ namespace InventoryControlTRD.Domain.Core.Interfaces.Repositories
     public interface IReportRepository
     {
         IEnumerable<Report> GetRequestReport(DateTime startDate, DateTime finalDate);
-        IEnumerable<Report> InventoryOutReport(DateTime startDate, DateTime finalDate);
+        IEnumerable<Report> GetInventoryOutReport(DateTime startDate, DateTime finalDate);
     }
 }

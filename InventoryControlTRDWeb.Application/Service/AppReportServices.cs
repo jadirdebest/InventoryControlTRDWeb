@@ -23,11 +23,10 @@ namespace InventoryControlTRDWeb.Application.Service
             foreach (var report in listMoviments) yield return new RequestReportDto(report.Date,report.Name,report.Amount,report.CostTotal,report.SaleTotal);
         }
 
-        public IEnumerable<InventoryOutReportDto> InventoryOutReport(DateTime startDate, DateTime finalDate)
+        public IEnumerable<InventoryOutReportDto> GetInventoryOutReport(DateTime startDate, DateTime finalDate)
         {
-            throw new NotImplementedException();
-            //var listMoviments = _reportService.GetRequestReport(startDate, finalDate);
-            //foreach (var report in listMoviments) yield return new InventoryOutReportDto(report.Date, report.Name, report.Amount, report.CostTotal, report.SaleTotal);
+            var listMoviments = _reportService.GetInventoryOutReport(startDate, finalDate);
+            foreach (var report in listMoviments) yield return new InventoryOutReportDto(report.Date, report.Name, report.Amount, report.CostTotal);
         }
 
         

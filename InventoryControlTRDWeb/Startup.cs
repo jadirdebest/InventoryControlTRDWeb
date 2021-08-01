@@ -78,7 +78,7 @@ namespace InventoryControlTRDWeb
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{area=Client}/{controller=Product}/{action=List}/{id?}");
+                    pattern: "{area=exists}/{controller=Product}/{action=List}/{id?}");
             });
         }
     }

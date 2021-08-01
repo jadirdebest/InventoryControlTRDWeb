@@ -23,10 +23,10 @@ namespace InventoryControlTRD.Domain.Services
             return _repo.GetRequestReport(startDate, finalDate);
         }
 
-        public IEnumerable<Report> InventoryOutReport(DateTime startDate, DateTime finalDate)
+        public IEnumerable<Report> GetInventoryOutReport(DateTime startDate, DateTime finalDate)
         {
             if (startDate.CompareTo(finalDate) > 1) throw new Exception("");
-            return _repo.GetRequestReport(startDate, finalDate);
+            return _repo.GetInventoryOutReport(startDate, finalDate);
         }
     }
 }

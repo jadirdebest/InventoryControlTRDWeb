@@ -10,6 +10,6 @@ namespace InventoryControlTRDWeb.Application.Interface
     public interface IAppReportService
     {
         IEnumerable<RequestReportDto> GetRequestReport(DateTime startDate, DateTime finalDate);
-        IEnumerable<InventoryOutReportDto> InventoryOutReport(DateTime startDate, DateTime finalDate);
+        IEnumerable<InventoryOutReportDto> GetInventoryOutReport(DateTime startDate, DateTime finalDate);
     }
 }
