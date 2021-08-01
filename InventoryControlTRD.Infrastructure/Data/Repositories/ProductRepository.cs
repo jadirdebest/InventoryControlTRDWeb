@@ -19,7 +19,7 @@ namespace InventoryControlTRD.Infrastructure.Data.Repositories
         {
             obj.Id = Guid.NewGuid();
             await _data.ExecuteAsync(@"insert into Product(Id,Name,Composite,CostPrice,SalePrice,Type,Actived) 
-                values(@Id,@Name,@Composite,@CostPrice,@SalePrice,@Type,@Actived)", obj);
+                values(@Id,UPPER(@Name),@Composite,@CostPrice,@SalePrice,@Type,@Actived)", obj);
         }
         public Task<IEnumerable<Product>> GetAllAsync()
         {
@@ -33,13 +33,22 @@ namespace InventoryControlTRD.Infrastructure.Data.Repositories
 
         public Task<Product> GetByIdAsync(Guid? id)
         {
-            return _data.QuerySingleAsync(@"select * from Product where Id = @Id", new { Id = id });
+            return _data.QuerySingleAsync(@"select xa.Id, xa.Name,xa.CostPrice,xa.SalePrice,xa.Type,xa.Composite,xa.CreatedOn,xa.ModifiedOn,xa.Actived
+                                            from Product xa
+                                            where xa.Composite = 0 and xa.Id =  @Id
+                                            union 
+                                            select distinct xb.ProductId, xa.Name,(
+                                            	select Sum(xa.CostPrice * xb.Amount)as CostPrice
+                                            	from Product xa
+                                            	inner join SubProduct xb on xa.Id = xb.SubProductId
+                                            	where xb.ProductId =   @Id
+                                            	group by xb.ProductId
+                                            ) as CostPrice,xa.SalePrice,xa.Type,xa.Composite,xa.CreatedOn,xa.ModifiedOn,xa.Actived
+                                            from Product xa
+                                            inner join SubProduct xb on xa.Id = xb.ProductId
+                                            where xb.ProductId = @Id", new { Id = id });
         }
 
-        public Task<IEnumerable<Product>> GetSimpleProductsFromComposedProducts(Guid composedProductId)
-        {
-            throw new NotImplementedException();
-        }
 
         public async void RemoveAsync(Product obj)
         {
@@ -52,9 +61,9 @@ namespace InventoryControlTRD.Infrastructure.Data.Repositories
                                      CostPrice = @CostPrice,
                                      SalePrice = @SalePrice,
                                      Type = @Type,
-                                     Actived = @Actived 
+                                     Actived = @Actived, 
                                      ModifiedOn = sysdatetime()
-                                 where Id = @Id" );
+                                 where Id = @Id", obj );
         }
     }
 }

@@ -13,16 +13,14 @@
             <tr>
                 <th>Produto</th>
                 <th>Estoque</th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var subProduct in Model.InventoryList)
             {
             <tr>
-                <td>@subProduct.ProductId</td>
+                <td>@subProduct.Product.Name</td>
                 <td>@subProduct.Amount</td>
-                <td> @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ })</td>
             </tr>
             }
         </tbody>

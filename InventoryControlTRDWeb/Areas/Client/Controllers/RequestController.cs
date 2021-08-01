@@ -12,51 +12,40 @@ using System.Threading.Tasks;
 namespace InventoryControlTRDWeb.Areas.Client.Controllers
 {
     [Area("Client")]
-    public class MovimentController : BaseController
+    public class RequestController : RequestBaseController
     {
         private readonly IAppProductService _productService;
+        private readonly IAppInventoryService _inventoryService;
         private readonly IAppMovimentService _movimentService;
-        private List<MovimentProductDto> MovimentProductList;
         
-        public MovimentController(IAppProductService productService, IAppMovimentService movimentService)
+        
+        public RequestController(IAppProductService productService, IAppInventoryService inventoryService, IAppMovimentService movimentService)
         {
             _productService = productService;
+            _inventoryService = inventoryService;
             _movimentService = movimentService;
         }
 
-        private void LoadList()
-        {
-            MovimentProductList = GetSession(".listproduct") == null ? 
-                new List<MovimentProductDto>() :  
-                JsonSerializer.Deserialize<List<MovimentProductDto>>(GetSession(".listproduct"));
-        }
-
         [HttpPost]
-        public async Task<IActionResult> AddProductMoviment(MovimentViewModel model)
+        public async Task<IActionResult> AddProductMoviment(AddMovimentViewModel model)
         {
             try
             {
-                LoadList();
                 var product = await _productService.GetById(model.ProductId);
-                
-                MovimentProductList.Add(new MovimentProductDto()
+
+                AddMovimentRequest(new MovimentProductDto()
                 {
                     Amount = model.Amount,
-                    ProductId = product.Id,
+                    Product = product,
                     SubTotalCostPrice = product.CostPrice * model.Amount,
                     SubTotalSalePrice = product.SalePrice * model.Amount
                 });
 
-                SetSession(".listproduct", MovimentProductList);
-
-                model.ProductList = await _productService.GetAllAsync();
-                model.MovimentProductList = MovimentProductList;
-
-                return View("ProductRequest",model);
+                return Ok(new { success = true, message = "Adicionado com Sucesso!" });
             }
             catch (Exception ex)
             {
-                throw;
+                return BadRequest(new { success = false, message = ex.Message });
             }
         }
 
@@ -65,8 +54,7 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
         {
             try
             {
-                LoadList();
-                return View(new MovimentViewModel(await _productService.GetAllAsync() , MovimentProductList));
+                return View(new MovimentViewModel((await _productService.GetAllAsync()).Where(a => a.Actived) , MovimentProductList));
             }
             catch (Exception ex)
             {
@@ -81,8 +69,6 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
         {
             try
             {
-                LoadList();
-
                 _movimentService.AddMoviment(new MovimentDto()
                 {
                     Id = Guid.NewGuid(),
@@ -92,17 +78,21 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
                     MovimentProducts = MovimentProductList,
                 });
 
-                MovimentProductList.Clear();
-                SetSession(".listproduct", MovimentProductList);
-
+                ClearMovimentRequest();
+                ViewBag.Success = "Requisição Realizado com sucesso, os produtos requisitados já foram baixados do estoque";
                 return View(new MovimentViewModel(await _productService.GetAllAsync(), MovimentProductList));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
                 throw;
             }
 
+        }
+
+
+        public PartialViewResult ListProdutRequest()
+        {
+            return PartialView(MovimentProductList);
         }
     }
 }

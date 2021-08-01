@@ -25,15 +25,26 @@ namespace InventoryControlTRD.Infrastructure.Data.Repositories
         }
         public async Task<IEnumerable<Inventory>> GetAllAsync()
         {
-            return await _data.QueryAsync(@"select * from Inventory");
+            return await _data.QueryAsync<Product>(@"select * from Inventory xa inner join Product xb on xa.ProductId = xb.Id",
+                (inventory,product) =>
+                {
+                    inventory.Product = product;
+                    return inventory;
+                });
         }
         public async Task<Inventory> GetByIdAsync(Guid? id)
         {
             return await _data.QuerySingleAsync(@"select * from Inventory where Id = @ID ", new { @ID = id });
         }
-        public async Task<Inventory> GetByProductIdAsync(Guid? id)
+        public async Task<IEnumerable<Inventory>> GetByProductIdAsync(Guid? id)
         {
-            return await _data.QuerySingleAsync(@"select * from Inventory where ProductId = @ID ", new { @ID = id });
+            //Testar
+            return await _data.QueryAsync(@"select  xa.Id, xa.Amount,xa.Min,xa.Max 
+                        from Inventory xa 
+                        inner join Product xc on xc.Id = xa.ProductId
+                        left join SubProduct xb on xa.Productid = xb.SubProductID  
+                        where xa.ProductId = @ID or xb.ProductId = @ID",
+                        new { @ID = id });
         }
         public void RemoveAsync(Inventory obj)
         {

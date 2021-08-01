@@ -1,0 +1,35 @@
+﻿@model IEnumerable<InventoryControlTRDWeb.Application.Dto.MovimentProductDto>
+<table class="table table-responsive-sm">
+    <thead>
+        <tr>
+            <th>Quantidade</th>
+            <th>Produto</th>
+            <th>Valor de Venda</th>
+            <th>SubTotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            foreach (var movimentProduct in Model)
+            {
+                <tr>
+                    <td>@movimentProduct.Amount</td>
+                    <td>@movimentProduct.Product.Name</td>
+                    <td>@movimentProduct.Product.SalePrice</td>
+                    <td>@movimentProduct.SubTotalSalePrice</td>
+                </tr>
+            }
+        }
+    </tbody>
+    <ftoot>
+        <tr>
+            <td colspan="4">
+                <div class="form-group">
+                    <label><strong> Valor de Venda Total da Retirada</strong></label>
+                    <input value="@Model.Sum(a => a.SubTotalSalePrice)" class="form-control form-control-sm" readonly />
+                </div>
+            </td>
+        </tr>
+    </ftoot>
+</table>

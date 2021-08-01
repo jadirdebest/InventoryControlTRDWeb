@@ -21,6 +21,8 @@ namespace InventoryControlTRDWeb.Application.Dto
 
         }
         public Guid? ProductId { get; set; }
+        public ProductDto Product { get; set; }
+
         public int Amount { get; set; }
         public int Min { get; set; }
         public int Max { get; set; }

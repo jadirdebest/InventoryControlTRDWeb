@@ -77,5 +77,32 @@ namespace InventoryControlTRD.Infrastructure.Data.Core
                 return conn.Query<T>(query, obj);
             }
         }
+
+        public async Task<IEnumerable<T>> QueryAsync<X>(string query, Func<T,X,T> func)
+        {
+            using (SqlConnection conn = new SqlConnection(Connection.SqlConnectionString))
+            {
+                conn.Open();
+                return await conn.QueryAsync<T,X,T>(query, func);
+            }
+        }
+
+        public async Task<IEnumerable<T>> QueryAsync<X>(string query, Func<T, X, T> func, object obj)
+        {
+            using (SqlConnection conn = new SqlConnection(Connection.SqlConnectionString))
+            {
+                conn.Open();
+                return await conn.QueryAsync<T, X, T>(query, func, param: obj, splitOn: "Id");
+            }
+        }
+
+        public void ExecuteMultiple(string query, IEnumerable<object> objList)
+        {
+            using (SqlConnection conn = new SqlConnection(Connection.SqlConnectionString))
+            {
+                conn.Open();
+                conn.Execute(query, objList);
+            }
+        }
     }
 }

@@ -35,7 +35,14 @@ namespace InventoryControlTRD.Infrastructure.Data.Repositories
 
         public Task<IEnumerable<SubProduct>> GetSubProductsByProductIdAsync(Guid? id)
         {
-            return _data.QueryAsync(@"select * from SubProduct where ProductId = @Id", new { Id = id });
+            return _data.QueryAsync(@"select xa.Id, xa.Name,xa.CostPrice,xa.SalePrice,xa.Type,1 as Amount,xa.Composite,xa.CreatedOn,xa.ModifiedOn,xa.Actived
+                                        from Product xa
+                                        where xa.Composite = 0 and xa.Id = @Id
+                                      union 
+                                        select xb.SubProductId as Id, xa.Name,xa.CostPrice,xa.SalePrice,xa.Type,xb.Amount,xa.Composite,xa.CreatedOn,xa.ModifiedOn,xa.Actived
+                                        from Product xa
+                                        inner join SubProduct xb on xa.Id = xb.SubProductId
+                                        where xb.ProductId = @Id", new { Id = id });
         }
 
         public async void RemoveAsync(SubProduct obj)

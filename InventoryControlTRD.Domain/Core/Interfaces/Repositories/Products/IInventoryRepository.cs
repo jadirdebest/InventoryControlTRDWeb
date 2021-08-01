@@ -9,7 +9,7 @@ namespace InventoryControlTRD.Domain.Core.Interfaces.Repositories
 {
     public interface IInventoryRepository : IBaseRepository<Inventory>
     {
-        Task<Inventory> GetByProductIdAsync(Guid? id);
+        Task<IEnumerable<Inventory>> GetByProductIdAsync(Guid? id);
         void SubtractAmountList(IEnumerable<Inventory> inventoryList);
     }
 }

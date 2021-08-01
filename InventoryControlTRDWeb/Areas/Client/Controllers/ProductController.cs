@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace InventoryControlTRDWeb.Areas.Client.Controllers
 {
     [Area("Client")]
-    public class ProductController : BaseController
+    public class ProductController : Controller
     {
         private readonly IAppProductService _productService;
         private readonly IAppAccountService _appAccountService;
@@ -70,6 +70,22 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Edit(ProductViewModel model)
+        {
+            try
+            {
+                if (!ModelState.IsValid) return View(model);
+                _productService.Save(new ProductDto(model.Id, model.Name, model.Composite, Decimal.Parse(model.CostPrice), Decimal.Parse(model.SalePrice), model.Active, model.Type));
+
+                return View(model);
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }

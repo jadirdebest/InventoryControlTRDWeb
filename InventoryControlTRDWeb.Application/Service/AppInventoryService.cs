@@ -28,7 +28,13 @@ namespace InventoryControlTRDWeb.Application.Service
 
         public async Task<IEnumerable<InventoryDto>> GetAllItensAsync()
         {
-            return _mapper.Map<IEnumerable<InventoryDto>>(await _inventoryService.GetAllAsync());
+            var products = await _inventoryService.GetAllAsync();
+            return _mapper.Map<IEnumerable<InventoryDto>>(products);
+        }
+
+        public async Task<IEnumerable<InventoryDto>> GetItembyProducuId(Guid? id)
+        {
+            return _mapper.Map<IEnumerable<InventoryDto>>(await _inventoryService.GetByProductIdAsync(id));
         }
     }
 }

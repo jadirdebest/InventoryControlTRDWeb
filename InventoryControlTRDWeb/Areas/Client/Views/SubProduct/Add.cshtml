@@ -4,10 +4,6 @@
     ViewData["Title"] = "Add";
     Layout = "_Layout";
 }
-
-<h1>Add</h1>
-
-@* Modal para adicionar Produto *@
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -22,7 +18,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Selecione o Produto</label>
-                        <select asp-for="SubProductId" class="form-control">
+                        <select asp-for="SubProductId" class="form-control form-control-sm">
                             @foreach (var product in Model.ProductList)
                             {
                                 <option value="@product.Id">@product.Name</option>
@@ -31,12 +27,12 @@
                     </div>
                     <div class="form-group">
                         <label>Quantidade</label>
-                        <input class="form-control" asp-for="Amount" />
+                        <input class="form-control form-control-sm" asp-for="Amount" />
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Adicionar</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Adicionar</button>
                 </div>
             </form>
         </div>
@@ -44,24 +40,18 @@
 </div>
 
 <div>
-    <h4>SubProductViewModel</h4>
+    <h4>Adicionar Sub Produto</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.Name)
+            Nome
         </dt>
         <dd class="col-sm-10">
             @Model.Product.Name
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.SubProductId)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.SubProductId)
-        </dd>
     </dl>
-    <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Novo SubProduto</button>
-    <table class="table">
+    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal" style="margin-bottom:2em">Novo Sub Produto</button>
+    <table class="table" >
         <thead>
             <tr>
                 <th>Sub Produto</th>
@@ -80,6 +70,5 @@
     </table>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+    @Html.ActionLink("Voltar a Lista de Produtos","List","Product")
 </div>

@@ -1,0 +1,104 @@
+﻿@model MovimentViewModel
+@{
+    ViewData["Title"] = "Requisição de Produto";
+    Layout = "_Layout";
+}
+
+<div class="modal fade" id="requestProduct" tabindex="-1" role="dialog" aria-labelledby="requestProductLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form asp-action="AddProductMoviment" id="AddProductMovimentForm">
+                <div class="modal-header">
+                    <h5 class="modal-title">Adicionar SubProduto</h5>
+                    <button type="button" class="close  form-control-sm" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Selecione o Produto</label>
+                        <select name="ProductId" id="ProductId" class="form-control form-control-sm">
+                            @foreach (var product in Model.ProductList)
+                            {
+                                <option value="@product.Id">@product.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Quantidade</label>
+                        <input name="Amount" id="Amount" class="form-control form-control-sm" min="1" type="number" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" onclick="AddProductMovimentSubmit()">Adicionar à Lista</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<h4>Requisição de Produto</h4>
+<hr />
+
+@if (ViewBag.Success != null)
+{
+    <p id="alert_msg" class="alert alert-success">@ViewBag.Success</p>
+}
+
+<p id="alert_msg" class="alert alert-warning" style="display:none"></p>
+
+<form asp-action="ProductRequest">
+    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#requestProduct">Adicionar Produto</button>
+    <button type="submit" class="btn btn-primary btn-sm">Finalizar Requisição</button>
+
+    <div class="row" style="padding-top:2em">
+        <div class="col-sm-12 col-md-6">
+            <div class="form-group">
+                <label asp-for="Date"> <strong>Data de Requisição</strong></label>
+                <input type="date" asp-for="Date" class="form-control form-control-sm" />
+            </div>
+        </div>
+    </div>
+</form>
+<div class="row" style="padding-top:2em" id="data"></div>
+
+<div>
+    <a asp-action="List" asp-controller="Product">Voltar</a>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<script type="text/javascript">
+    $(document).ready(() => { LoadTableList() })
+
+    function LoadTableList() {
+        var url = "/Client/Request/ListProdutRequest";
+        $.ajax({
+            type: 'POST',
+            url: url,
+        }).done(function (response) {
+            $('#data').html(response);
+        });
+    }
+    function AddProductMovimentSubmit() {
+        var url = $("#AddProductMovimentForm").attr("action");
+        var formData = new FormData();
+        formData.append("ProductId", $("#ProductId").val());
+        formData.append("Amount", $("#Amount").val());
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: formData,
+            processData: false,
+            contentType: false
+        }).done(function (response) {
+            if (response.success) {
+                LoadTableList();
+            } else {
+                $('#alert_msg').html(response.message).fadeIn(50);
+            }
+        }).fail((response) => console.log(response));
+    }
+</script>
