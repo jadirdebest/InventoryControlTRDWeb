@@ -8,10 +8,10 @@ namespace InventoryControlTRD.Domain.Models
 {
     public class Moviment : Base
     {
-        public Guid ProductId { get; set; }
-        public int Ammout { get; set; }
-        public decimal SubTotalCostPrice { get; set; }
-        public decimal SubTotalSalePrice { get; set; }
+        public Guid? UserId { get; set; }
+        public decimal TotalCostPrice { get; set; }
+        public decimal TotalSalePrice { get; set; }
+        public DateTime Date { get; set; }
         public int MovimentType { get; set; }
     }
 }

@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace InventoryControlTRD.Domain.Models
 {
-    public class Role : Base
+    public class Role 
     {
+        public Guid? Id { get; set; }
         public string Name { get; set; }
     }
 }

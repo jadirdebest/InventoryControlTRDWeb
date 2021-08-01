@@ -1,4 +1,5 @@
-﻿using InventoryControlTRDWeb.Application.Interface;
+﻿using InventoryControlTRDWeb.Application.Dto;
+using InventoryControlTRDWeb.Application.Interface;
 using InventoryControlTRDWeb.Areas.Client.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -23,8 +24,9 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
             try
             {
                 var product = await _productService.GetById(idProduct);
+                var listProducts = (await _productService.GetAllAsync()).Where(a => a.Id != idProduct);
                 var listSubProducts = await _subProductService.GetByProductId(idProduct);
-                return View(new SubProductViewModel(product,listSubProducts));
+                return View(new SubProductViewModel(product,listProducts,listSubProducts));
             }
             catch (Exception)
             {
@@ -32,6 +34,24 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
                 throw;
             }
             
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(SubProductViewModel subProduct)
+        {
+            try
+            {
+                await _subProductService.Save(new SubProductDto(subProduct.Product.Id,subProduct.SubProductId,subProduct.Amount));
+
+
+                return RedirectToAction("Add", new { idProduct = subProduct.Product.Id });
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
     }
 }

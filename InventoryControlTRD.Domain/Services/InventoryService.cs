@@ -16,5 +16,23 @@ namespace InventoryControlTRD.Domain.Services
         {
             _repo = repo;
         }
+
+        public override void Add(Inventory obj)
+        {
+            var itemExist = _repo.GetByProductIdAsync(obj.ProductId).Result;
+            if (itemExist != null) throw new ArgumentException("Este produto já foi adicionado ao Estoque");
+
+             _repo.AddAsync(obj);
+        }
+
+        public async Task<Inventory> GetByProductIdAsync(Guid id)
+        {
+            return await _repo.GetByProductIdAsync(id);
+        }
+
+        public void SubtractAmountList(IEnumerable<Inventory> list)
+        {
+            _repo.SubtractAmountList(list);
+        }
     }
 }

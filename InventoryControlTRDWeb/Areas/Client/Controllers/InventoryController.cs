@@ -1,0 +1,70 @@
+﻿using InventoryControlTRDWeb.Application.Dto;
+using InventoryControlTRDWeb.Application.Interface;
+using InventoryControlTRDWeb.Areas.Client.Models;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace InventoryControlTRDWeb.Areas.Client.Controllers
+{
+    [Area("Client")]
+    public class InventoryController : Controller
+    {
+        private IAppInventoryService _inventoryService;
+        private IAppProductService _productService;
+
+        public InventoryController(IAppInventoryService inventoryService, IAppProductService productService)
+        {
+            _inventoryService = inventoryService;
+            _productService = productService;
+        }
+        public async Task<IActionResult> List()
+        {
+            return View(new InventoryListViewModel(await _inventoryService.GetAllItensAsync()));
+        }
+
+        public async Task<IActionResult> Add()
+        {
+            try
+            {
+                var simpleProductList = await _productService.GetAllSimpleProducts();
+
+                return View(new InventoryViewModel(simpleProductList));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(InventoryViewModel model)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    model.SimpleProductList = await _productService.GetAllSimpleProducts();
+                    return View(model); 
+                }
+
+                _inventoryService.AddItem(new InventoryDto(model.ProductId,model.Amount,model.Min,model.Max));
+                return RedirectToAction("List");
+
+            }
+            catch (Exception ex)
+            {
+                model.SimpleProductList = await _productService.GetAllSimpleProducts();
+                if (ex is ArgumentException)
+                {
+                    ViewBag.Info = ex.Message;
+                }
+
+                return View(model);
+            }
+        }
+    }
+}

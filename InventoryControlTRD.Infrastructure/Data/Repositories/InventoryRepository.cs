@@ -12,37 +12,37 @@ namespace InventoryControlTRD.Infrastructure.Data.Repositories
     public class InventoryRepository : IBaseRepository<Inventory>, IInventoryRepository
     {
         private IDataCore<Inventory> _data;
-
-        /*
-          public Guid ProductId { get; set; }
-        public int Ammout { get; set; }
-        public int Min { get; set; }
-        public int Max { get; set; }
-         */
         public InventoryRepository(IDataCore<Inventory> data)
         {
             _data = data;
         }
 
-        public void AddAsync(Inventory obj)
+        public async void AddAsync(Inventory obj)
         {
-            _data.ExecuteAsync(@"insert into Inventory(ProductId,Ammout,Min,Max,CreatedOn,ModifiedOn,Active) 
-                                 values(@CreatedOn,@ModifiedOn,@Active)", obj);
+            obj.Id = Guid.NewGuid();
+            await _data.ExecuteAsync(@"insert into Inventory(Id,ProductId,Amount,Min,Max,CreatedOn,Actived) 
+                                 values(@Id,@ProductId,@Amount,@Min,@Max,sysdatetime(),@Actived)", obj);
         }
-
-        public Task<IEnumerable<Inventory>> GetAllAsync()
+        public async Task<IEnumerable<Inventory>> GetAllAsync()
         {
-            return _data.QueryAsync(@"select * from Inventory");
+            return await _data.QueryAsync(@"select * from Inventory");
         }
-
-        public Task<Inventory> GetByIdAsync(Guid id)
+        public async Task<Inventory> GetByIdAsync(Guid? id)
         {
-            return _data.QuerySingleAsync(@"select * from Inventory where Id = @ID ", new { @ID = id });
+            return await _data.QuerySingleAsync(@"select * from Inventory where Id = @ID ", new { @ID = id });
         }
-
+        public async Task<Inventory> GetByProductIdAsync(Guid? id)
+        {
+            return await _data.QuerySingleAsync(@"select * from Inventory where ProductId = @ID ", new { @ID = id });
+        }
         public void RemoveAsync(Inventory obj)
         {
             throw new NotImplementedException(); // Não irá ser permtido excluir inventário.
+        }
+
+        public async void SubtractAmountList(IEnumerable<Inventory> inventoryList)
+        {
+            await _data.ExecuteMultipleAsync("update Inventory set Amount = Amount - @Amount where ProductId = @ProductId", inventoryList);
         }
 
         public void UpdateAsync(Inventory obj)

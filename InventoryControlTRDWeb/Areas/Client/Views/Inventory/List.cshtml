@@ -1,0 +1,33 @@
+﻿@model InventoryControlTRDWeb.Areas.Client.Models.InventoryListViewModel
+@{ 
+    Layout = "_Layout";
+}
+
+<div>
+    <h4>Inventory </h4>
+    <hr />
+    @Html.ActionLink("Novo Lançamento","Add","Inventory",null,new { @class = "btn btn-success" })
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Estoque</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var subProduct in Model.InventoryList)
+            {
+            <tr>
+                <td>@subProduct.ProductId</td>
+                <td>@subProduct.Amount</td>
+                <td> @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ })</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div>
+    
+    <a asp-action="Index">Back to List</a>
+</div> 

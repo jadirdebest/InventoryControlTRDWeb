@@ -1,0 +1,115 @@
+﻿@model MovimentViewModel
+@{
+    ViewData["Title"] = "ProductRequest";
+    Layout = "_Layout";
+}
+
+
+@* Modal para adicionar Produto *@
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form asp-action="AddProductMoviment">
+                <input type="hidden" asp-for="Date" class="form-control" />
+                <input asp-for="Id" type="hidden" />
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Selecione o Produto</label>
+                        <select asp-for="ProductId" class="form-control">
+                            @foreach (var product in Model.ProductList)
+                            {
+                                <option value="@product.Id">@product.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Quantidade</label>
+                        <input asp-for="Amount" class="form-control" type="number" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Adicionar à Lista</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<h1>Produto</h1>
+
+<h4>Adicionar Produto</h4>
+<hr />
+
+<h4>ProductDto</h4>
+<hr />
+<form asp-action="ProductRequest">
+    <dl class="row">
+        <dt class="col-sm-2">
+            Data da Requisição
+        </dt>
+        <dd class="col-sm-10">
+            <input type="date" asp-for="Date" class="form-control" />
+        </dd>
+        <dt class="col-sm-2">
+            Custo Total da Retirada
+        </dt>
+        <dd class="col-sm-10">
+            <input class="form-control" asp-for="TotalCostPrice" readonly />
+        </dd>
+        <dt class="col-sm-2">
+            Valor de Venda Total da Retirada
+        </dt>
+        <dd class="col-sm-10">
+            <input class="form-control" asp-for="TotalSalePrice" readonly />
+        </dd>
+    </dl>
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Novo SubProduto</button>
+    <button type="submit" class="btn btn-primary">Finalizar Pedido</button>
+</form>
+    
+    <div class="row">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Quantidade</th>
+                    <th>Produto</th>
+                    <th>Valor</th>
+                    <th>SubTotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var movimentProduct in Model.MovimentProductList)
+                {
+                    var product = Model.ProductList.Where(a => a.Id.Equals(movimentProduct.ProductId)).FirstOrDefault();
+
+                    <tr>
+                        <td>@movimentProduct.Amount</td>
+                        <td>@(product.Name)</td>
+                        <td>@(product.SalePrice)</td>
+                        <td>@(movimentProduct.SubTotalSalePrice)</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+
+        <a asp-action="Index">Back to List</a>
+    </div>
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+
+    <script type="text/javascript">
+
+    </script>
+

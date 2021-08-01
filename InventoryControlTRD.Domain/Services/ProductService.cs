@@ -14,7 +14,12 @@ namespace InventoryControlTRD.Domain.Services
         private readonly IProductRepository _repo;
         public ProductService(IProductRepository repo) : base(repo)
         {
+            _repo = repo;
+        }
 
+        public Task<IEnumerable<Product>> GetAllSimpleProducts()
+        {
+            return _repo.GetAllSimpleProducts();
         }
     }
 }

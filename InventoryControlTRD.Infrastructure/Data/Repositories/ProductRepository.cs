@@ -24,10 +24,22 @@ namespace InventoryControlTRD.Infrastructure.Data.Repositories
         {
             return _data.QueryAsync(@"select * from Product");
         }
-        public Task<Product> GetByIdAsync(Guid id)
+
+        public async Task<IEnumerable<Product>> GetAllSimpleProducts()
+        {
+            return await _data.QueryAsync(@"select * from Product xa where xa.Id not in(select ProductId from SubProduct)");
+        }
+
+        public Task<Product> GetByIdAsync(Guid? id)
         {
             return _data.QuerySingleAsync(@"select * from Product where Id = @Id", new { Id = id });
         }
+
+        public Task<IEnumerable<Product>> GetSimpleProductsFromComposedProducts(Guid composedProductId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async void RemoveAsync(Product obj)
         {
             await _data.ExecuteAsync("delete from Product where Id = @Id", obj);

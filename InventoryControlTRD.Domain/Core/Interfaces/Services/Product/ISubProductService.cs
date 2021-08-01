@@ -7,6 +7,6 @@ namespace InventoryControlTRD.Domain.Core.Interfaces.Services
 {
     public interface ISubProductService : IBaseService<SubProduct>
     {
-        Task<IEnumerable<SubProduct>> GetSubProductsByProductIdAsync(Guid id);
+        Task<IEnumerable<SubProduct>> GetSubProductsByProductIdAsync(Guid? id);
     }
 }

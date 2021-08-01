@@ -13,14 +13,18 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
     public class ProductController : Controller
     {
         private readonly IAppProductService _productService;
-
-        public ProductController(IAppProductService productService)
+        private readonly IAppAccountService _appAccountService;
+        public ProductController(IAppProductService productService, IAppAccountService appAccountService)
         {
             _productService = productService;
+            _appAccountService = appAccountService;
         }
 
         public async Task<IActionResult> List() 
         {
+
+            //_appAccountService.CreateAccount(new AccountDto()); //Isso ira sair
+
             ViewBag.Role = "Administrator";
             return View(new ProductListViewModel(await _productService.GetAllAsync())); 
         }

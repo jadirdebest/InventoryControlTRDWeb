@@ -10,9 +10,11 @@ namespace InventoryControlTRDWeb.Application.Dto
     public class MovimentDto : BaseDto
     {
         public Guid ProductId { get; set; }
-        public int Ammout { get; set; }
-        public decimal SubTotalCostPrice { get; set; }
-        public decimal SubTotalSalePrice { get; set; }
+        public Guid? UserId { get; set; }
+        public DateTime Date { get; set; }
+        public decimal TotalCostPrice { get => MovimentProducts != null ? MovimentProducts.Sum(a => a.SubTotalCostPrice) : 0; }
+        public decimal TotalSalePrice { get => MovimentProducts != null ? MovimentProducts.Sum(a => a.SubTotalSalePrice) : 0; }
         public MovimentType MovimentType { get; set; }
+        public IEnumerable<MovimentProductDto> MovimentProducts { get; set; }
     }
 }

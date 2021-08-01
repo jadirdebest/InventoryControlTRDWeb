@@ -14,8 +14,20 @@ namespace InventoryControlTRDWeb.Application.MapperConfig
             CreateMap<SubProduct, SubProductDto>();
             CreateMap<SubProductDto, SubProduct>();
 
+            CreateMap<Inventory, InventoryDto>();
             CreateMap<InventoryDto, Inventory>();
-            CreateMap<InventoryDto, Inventory>();
+
+            CreateMap<Moviment, MovimentDto>();
+            CreateMap<MovimentDto, Moviment>();
+
+            CreateMap<MovimentProduct, MovimentProductDto>();
+            CreateMap<MovimentProductDto, MovimentProduct>();
+
+            CreateMap<User, UserDto>();
+            CreateMap<UserDto, User>();
+
+            CreateMap<Role, RoleDto>();
+            CreateMap<RoleDto, Role>();
         }
     }
 }

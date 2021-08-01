@@ -17,7 +17,7 @@ namespace InventoryControlTRD.Domain.Services
             _repo = repo;
         }
 
-        public async Task<IEnumerable<SubProduct>> GetSubProductsByProductIdAsync(Guid id)
+        public async Task<IEnumerable<SubProduct>> GetSubProductsByProductIdAsync(Guid? id)
         {
             return await _repo.GetSubProductsByProductIdAsync(id);
         }

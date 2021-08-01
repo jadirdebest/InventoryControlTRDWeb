@@ -17,5 +17,10 @@ namespace InventoryControlTRD.Domain.Services
         {
             _repo = repo;
         }
+
+        public async  Task<Moviment> AddWithReturnAsync(Moviment obj)
+        {
+            return await _repo.AddWithReturnAsync(obj);
+        }
     }
 }

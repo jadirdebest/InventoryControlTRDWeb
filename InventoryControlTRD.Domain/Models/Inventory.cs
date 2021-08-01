@@ -8,8 +8,8 @@ namespace InventoryControlTRD.Domain.Models
 {
     public class Inventory : Base
     {
-        public Guid ProductId { get; set; }
-        public int Ammout { get; set; }
+        public Guid? ProductId { get; set; }
+        public int Amount { get; set; }
         public int Min { get; set; }
         public int Max { get; set; }
     }

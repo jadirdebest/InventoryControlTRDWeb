@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 using InventoryControlTRDWeb.Application.MapperConfig;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace InventoryControlTRDWeb
 {
@@ -31,6 +32,22 @@ namespace InventoryControlTRDWeb
             services.AddControllersWithViews();
             services.AddEssentialsServices(); 
             services.AddAutoMapper(x => x.AddProfile(new MapperProfiles()));
+
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(opt =>
+            {
+                opt.AccessDeniedPath = "/Client/Login/DeniedLogon";
+                opt.LoginPath = "/Client/Login/Logon";
+                opt.LogoutPath = "";
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -49,10 +66,14 @@ namespace InventoryControlTRDWeb
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseSession();
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

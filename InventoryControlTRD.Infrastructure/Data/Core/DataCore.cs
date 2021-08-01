@@ -27,6 +27,15 @@ namespace InventoryControlTRD.Infrastructure.Data.Core
                 await conn.ExecuteAsync(query,obj);
             }
         }
+
+        public async Task ExecuteMultipleAsync(string query, IEnumerable<object> objList)
+        {
+            using (SqlConnection conn = new SqlConnection(Connection.SqlConnectionString))
+            {
+                conn.Open();
+                await conn.ExecuteAsync(query, objList);
+            }
+        }
         public void Execute(string query, object obj)
         {
             using (SqlConnection conn = new SqlConnection(Connection.SqlConnectionString))

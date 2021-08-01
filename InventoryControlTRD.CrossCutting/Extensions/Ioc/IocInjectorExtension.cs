@@ -16,36 +16,48 @@ namespace InventoryControlTRD.CrossCutting.Extensions.Ioc
             services.AddScoped(typeof(IDataCore<>), typeof(DataCore<>));
             AddProductService(services);
             AddSubProductService(services);
-            //AddInventoryService(services);
-        }
+            AddInventoryService(services);
+            AddMovimentService(services);
+            AddMovimentProductService(services);
+            AddAccountService(services);
 
+        }
         public static void AddProductService(this IServiceCollection services)
         {
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IAppProductService, AppProductService>();
         }
-
         public static void AddSubProductService(this IServiceCollection services)
         {
             services.AddScoped<ISubProductRepository, SubProductRepository>();
             services.AddScoped<ISubProductService, SubProductService>();
             services.AddScoped<IAppSubProductService, AppSubProductService>();
         }
-        //public static void AddInventoryService(this IServiceCollection services)
-        //{
-        //    services.AddScoped<IInventoryRepository, InventoryRepository>();
-        //    services.AddScoped<IProductService, ProductService>();
-        //}
-        //public static void AddMovimentService(this IServiceCollection services)
-        //{
-        //    services.AddScoped<IProductRepository, IProductRepository>();
-        //    services.AddScoped<IProductService, ProductService>();
-        //}
-        //public static void AddUsertService(this IServiceCollection services)
-        //{
-        //    services.AddScoped<IProductRepository, IProductRepository>();
-        //    services.AddScoped<IProductService, ProductService>();
-        //}
+        public static void AddInventoryService(this IServiceCollection services)
+        {
+            services.AddScoped<IInventoryRepository, InventoryRepository>();
+            services.AddScoped<IInventoryService, InventoryService>();
+            services.AddScoped<IAppInventoryService, AppInventoryService>();
+        }
+        public static void AddMovimentService(this IServiceCollection services)
+        {
+            services.AddScoped<IMovimentRepository, MovimentRepository>();
+            services.AddScoped<IMovimentService, MovimentService>();
+            services.AddScoped<IAppMovimentService, AppMovimentService>();
+        }
+        public static void AddMovimentProductService(this IServiceCollection services)
+        {
+            services.AddScoped<IMovimentProductRepository, MovimentProductRepository>();
+            services.AddScoped<IMovimentProductService, MovimentProductService>();
+        }
+        public static void AddAccountService(this IServiceCollection services)
+        {
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<IAppAccountService, AppAccountService>();
+        }
     }
 }

@@ -9,6 +9,6 @@ namespace InventoryControlTRD.Domain.Core.Interfaces.Repositories
 {
     public interface ISubProductRepository : IBaseRepository<SubProduct>
     {
-        Task<IEnumerable<SubProduct>> GetSubProductsByProductIdAsync(Guid id);
+        Task<IEnumerable<SubProduct>> GetSubProductsByProductIdAsync(Guid? id);
     }
 }

@@ -10,7 +10,8 @@ namespace InventoryControlTRDWeb.Application.Interface
     public interface IAppProductService
     {
         Task<IEnumerable<ProductDto>> GetAllAsync();
-        Task<ProductDto> GetById(Guid id);
+        Task<IEnumerable<ProductDto>> GetAllSimpleProducts();
+        Task<ProductDto> GetById(Guid? id);
         void Save(ProductDto product);
     }
 }

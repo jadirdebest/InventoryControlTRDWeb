@@ -27,7 +27,7 @@ namespace InventoryControlTRD.Domain.Services
             return _repo.GetAllAsync();
         }
 
-        public virtual Task<T> GetByIdAsync(Guid id)
+        public virtual Task<T> GetByIdAsync(Guid? id)
         {
             return _repo.GetByIdAsync(id);
         }
