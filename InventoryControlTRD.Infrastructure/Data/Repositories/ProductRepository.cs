@@ -18,7 +18,8 @@ namespace InventoryControlTRD.Infrastructure.Data.Repositories
         public async void AddAsync(Product obj)
         {
             obj.Id = Guid.NewGuid();
-            await _data.ExecuteAsync(@"insert into Product(Id,Name,CostPrice,SalePrice,Type,Actived) values(@Id,@Name,@CostPrice,@SalePrice,@Type,@Actived)",obj);
+            await _data.ExecuteAsync(@"insert into Product(Id,Name,Composite,CostPrice,SalePrice,Type,Actived) 
+                values(@Id,@Name,@Composite,@CostPrice,@SalePrice,@Type,@Actived)", obj);
         }
         public Task<IEnumerable<Product>> GetAllAsync()
         {
@@ -27,7 +28,7 @@ namespace InventoryControlTRD.Infrastructure.Data.Repositories
 
         public async Task<IEnumerable<Product>> GetAllSimpleProducts()
         {
-            return await _data.QueryAsync(@"select * from Product xa where xa.Id not in(select ProductId from SubProduct)");
+            return await _data.QueryAsync(@"select * from Product where Composite =  0");
         }
 
         public Task<Product> GetByIdAsync(Guid? id)

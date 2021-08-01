@@ -18,6 +18,7 @@
   <ItemGroup>
     <Folder Include="Areas\Client\Data\" />
     <Folder Include="Areas\Client\Models\Moviment\" />
+    <Folder Include="Areas\Manager\Data\" />
   </ItemGroup>
 
 </Project>

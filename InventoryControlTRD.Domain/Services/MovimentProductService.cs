@@ -21,5 +21,6 @@ namespace InventoryControlTRD.Domain.Services
         {
             _repo.Add(productlist);
         }
+     
     }
 }

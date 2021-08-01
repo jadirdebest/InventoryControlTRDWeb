@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace InventoryControlTRD.Domain.Core.Interfaces.Services
 {
-    public interface IMovimentProductService : IBaseService<MovimentProduct>
+    public interface IReportService
     {
-        void Add(IEnumerable<MovimentProduct> productlist);
-        
+        IEnumerable<Report> GetRequestReport(DateTime startDate, DateTime finalDate);
+        IEnumerable<Report> InventoryOutReport(DateTime startDate, DateTime finalDate);
     }
 }

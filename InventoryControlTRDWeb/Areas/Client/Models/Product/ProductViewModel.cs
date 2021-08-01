@@ -12,6 +12,7 @@ namespace InventoryControlTRDWeb.Areas.Client.Models
         public Guid? Id { get; set; }
         public bool Active { get; set; }
         public string Name { get; set; }
+        public bool Composite { get; set; }
 
         [DataType(DataType.Currency)]
         public string CostPrice { get; set; }
@@ -23,10 +24,11 @@ namespace InventoryControlTRDWeb.Areas.Client.Models
 
         }
 
-        public ProductViewModel(Guid? id, bool active, string name, string costPrice, string salePrice, ProductType type)
+        public ProductViewModel(Guid? id, bool active, string name,bool composite ,string costPrice, string salePrice, ProductType type)
         {
             Id = id;
             Active = active;
+            Composite = composite;
             Name = name;
             CostPrice = costPrice;
             SalePrice = salePrice;

@@ -13,14 +13,6 @@ namespace InventoryControlTRD.Infrastructure.Data.Repositories
     {
         private readonly IDataCore<Moviment> _data;
 
-        /*
-         * Id
-          public Guid? UserId { get; set; }
-        public decimal TotalCostPrice { get; set; }
-        public decimal TotalSalePrice { get; set; }
-        public int MovimentType { get; set; }
-        CreatedOn
-         */
         public MovimentRepository(IDataCore<Moviment> data)
         {
             _data = data;
@@ -46,6 +38,11 @@ namespace InventoryControlTRD.Infrastructure.Data.Repositories
         public Task<Moviment> GetByIdAsync(Guid? id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<Moviment>> GetMovementsByDateAsync(DateTime startDate, DateTime finalDate)
+        {
+            return await _data.QueryAsync(@"select * from Moviment where Date between @StartDate and @FinalDate", new { StartDate = startDate, FinalDate = finalDate } );
         }
 
         public void RemoveAsync(Moviment obj)

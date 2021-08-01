@@ -24,7 +24,7 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
             try
             {
                 var product = await _productService.GetById(idProduct);
-                var listProducts = (await _productService.GetAllAsync()).Where(a => a.Id != idProduct);
+                var listProducts = (await _productService.GetAllAsync()).Where(a => !a.Composite);
                 var listSubProducts = await _subProductService.GetByProductId(idProduct);
                 return View(new SubProductViewModel(product,listProducts,listSubProducts));
             }

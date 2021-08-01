@@ -92,6 +92,9 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
                     MovimentProducts = MovimentProductList,
                 });
 
+                MovimentProductList.Clear();
+                SetSession(".listproduct", MovimentProductList);
+
                 return View(new MovimentViewModel(await _productService.GetAllAsync(), MovimentProductList));
             }
             catch (Exception ex)

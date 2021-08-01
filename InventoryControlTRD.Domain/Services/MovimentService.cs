@@ -22,5 +22,6 @@ namespace InventoryControlTRD.Domain.Services
         {
             return await _repo.AddWithReturnAsync(obj);
         }
+     
     }
 }

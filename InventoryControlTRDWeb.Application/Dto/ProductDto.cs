@@ -13,12 +13,14 @@ namespace InventoryControlTRDWeb.Application.Dto
         {
 
         }
-        public ProductDto(Guid? id, string name, decimal costPrice, decimal salePrice, bool active , ProductType type)
+        public ProductDto(Guid? id, string name, bool composite,decimal costPrice, decimal salePrice, bool active , ProductType type)
         {
             Id = id;
             Name = name;
+            Composite = composite;
             CostPrice = costPrice;
             SalePrice = salePrice;
+
             Type = type;
             Actived = active;
         }
@@ -26,6 +28,7 @@ namespace InventoryControlTRDWeb.Application.Dto
         public string Name { get; set; }
         public decimal CostPrice { get; set; }
         public decimal SalePrice { get; set; }
+        public bool Composite { get; set; }
         public ProductType Type { get; set; }
     }
 }

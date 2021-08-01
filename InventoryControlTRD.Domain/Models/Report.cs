@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace InventoryControlTRD.Domain.Models
 {
-    public class Product : Base
+    public class Report
     {
+        public DateTime Date { get; set; }
         public string Name { get; set; }
-        public decimal CostPrice { get; set; }
-        public decimal SalePrice { get; set; }
-        public bool Composite { get; set; }
-        public int Type { get; set; }
+        public int Amount { get; set; }
+        public decimal CostTotal { get; set; }
+        public decimal SaleTotal { get; set; }
+
     }
 }

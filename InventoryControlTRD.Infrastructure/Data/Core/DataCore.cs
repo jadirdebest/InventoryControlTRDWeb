@@ -68,5 +68,14 @@ namespace InventoryControlTRD.Infrastructure.Data.Core
                 return await conn.QueryFirstOrDefaultAsync<T>(query, obj);
             }
         }
+
+        public IEnumerable<T> Query(string query, object obj)
+        {
+            using (SqlConnection conn = new SqlConnection(Connection.SqlConnectionString))
+            {
+                conn.Open();
+                return conn.Query<T>(query, obj);
+            }
+        }
     }
 }

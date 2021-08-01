@@ -8,6 +8,7 @@ namespace InventoryControlTRD.Infrastructure.Data.Core
 {
     public interface IDataCore<T> where T: class
     {
+        IEnumerable<T> Query(string query,object obj);
         Task<IEnumerable<T>> QueryAsync(string query);
         Task<IEnumerable<T>> QueryAsync(string query, object obj);
         Task<T> QuerySingleAsync(string query, object obj);

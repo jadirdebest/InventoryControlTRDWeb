@@ -39,12 +39,10 @@ namespace InventoryControlTRD.Infrastructure.Data.Repositories
         {
             throw new NotImplementedException(); // Não irá ser permtido excluir inventário.
         }
-
         public async void SubtractAmountList(IEnumerable<Inventory> inventoryList)
         {
             await _data.ExecuteMultipleAsync("update Inventory set Amount = Amount - @Amount where ProductId = @ProductId", inventoryList);
         }
-
         public void UpdateAsync(Inventory obj)
         {
             throw new NotImplementedException();

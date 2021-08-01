@@ -20,6 +20,7 @@ namespace InventoryControlTRD.CrossCutting.Extensions.Ioc
             AddMovimentService(services);
             AddMovimentProductService(services);
             AddAccountService(services);
+            AddReportService(services);
 
         }
         public static void AddProductService(this IServiceCollection services)
@@ -58,6 +59,12 @@ namespace InventoryControlTRD.CrossCutting.Extensions.Ioc
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IAppAccountService, AppAccountService>();
+        }
+        public static void AddReportService(this IServiceCollection services)
+        {
+            services.AddScoped<IReportRepository, ReportRepository>();
+            services.AddScoped<IReportService, ReportService>();
+            services.AddScoped<IAppReportService, AppReportServices>();
         }
     }
 }

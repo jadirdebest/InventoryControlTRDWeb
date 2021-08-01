@@ -63,13 +63,13 @@ namespace InventoryControlTRDWeb.Application.Service
             _movimentProductService.Add(GetMovimenProductList(obj,id));
         }
 
-        private async void UpdateInventory(MovimentDto obj)
+        private void UpdateInventory(MovimentDto obj)
         {
             List<Inventory> InventoryProductsUpdateList = new List<Inventory>();
 
             foreach (var mvProduct in obj.MovimentProducts)
             {
-                var subProducts = await _subProductService.GetSubProductsByProductIdAsync(mvProduct.ProductId);
+                var subProducts = _subProductService.GetSubProductsByProductIdAsync(mvProduct.ProductId).Result;
                 if (!subProducts.Any())
                 {
                     InventoryProductsUpdateList.Add(new Inventory() {ProductId = mvProduct.ProductId, Amount = mvProduct.Amount });

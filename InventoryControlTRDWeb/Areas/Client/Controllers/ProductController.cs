@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace InventoryControlTRDWeb.Areas.Client.Controllers
 {
     [Area("Client")]
-    public class ProductController : Controller
+    public class ProductController : BaseController
     {
         private readonly IAppProductService _productService;
         private readonly IAppAccountService _appAccountService;
@@ -22,7 +22,7 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
 
         public async Task<IActionResult> List() 
         {
-
+            //SetSession(".listproduct", null);
             //_appAccountService.CreateAccount(new AccountDto()); //Isso ira sair
 
             ViewBag.Role = "Administrator";
@@ -38,7 +38,8 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
             
             try
             {
-                _productService.Save(new ProductDto(model.Id,model.Name,Decimal.Parse(model.CostPrice),Decimal.Parse(model.SalePrice),model.Active,model.Type));
+                _productService.Save(
+                    new ProductDto(model.Id,model.Name,model.Composite,Decimal.Parse(model.CostPrice),Decimal.Parse(model.SalePrice),model.Active,model.Type));
                 return RedirectToAction("List");
             }
             catch (Exception ex)
@@ -65,7 +66,7 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
             try
             {
                 var product = await _productService.GetById(id);
-                return View(new ProductViewModel(product.Id,product.Actived,product.Name,product.CostPrice.ToString(),product.SalePrice.ToString(),product.Type));
+                return View(new ProductViewModel(product.Id,product.Actived,product.Name,product.Composite,product.CostPrice.ToString(),product.SalePrice.ToString(),product.Type));
             }
             catch (Exception)
             {
