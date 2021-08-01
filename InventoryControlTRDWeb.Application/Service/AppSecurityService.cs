@@ -1,15 +1,16 @@
-﻿using System;
+﻿using InventoryControlTRDWeb.Application.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InventoryControlTRD.CrossCutting.Security
+namespace InventoryControlTRDWeb.Application.Service
 {
-    public static class Utilities
+    public class AppSecurityService : IAppSecurityService
     {
-        public static string CreateMD5(string word)
+        public string CreateMD5(string word)
         {
             using (MD5 md5Hash = MD5.Create())
             {
@@ -23,7 +24,7 @@ namespace InventoryControlTRD.CrossCutting.Security
             }
         }
 
-        public static bool MD5IsMatch(string word, string hash)
+        public bool MD5IsMatch(string word, string hash)
         {
             using (MD5 md5Hash = MD5.Create())
             {

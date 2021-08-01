@@ -1,6 +1,8 @@
-﻿using InventoryControlTRDWeb.Application.Dto;
+﻿using InventoryControlTRD.CrossCutting.Extensions;
+using InventoryControlTRDWeb.Application.Dto;
 using InventoryControlTRDWeb.Application.Interface;
 using InventoryControlTRDWeb.Areas.Client.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,6 +14,7 @@ using System.Threading.Tasks;
 namespace InventoryControlTRDWeb.Areas.Client.Controllers
 {
     [Area("Client")]
+    [Authorize(Roles = "Manager,User,Administrator")]
     public class RequestController : RequestBaseController
     {
         private readonly IAppProductService _productService;
@@ -73,7 +76,7 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
                 {
                     Id = Guid.NewGuid(),
                     MovimentType = Application.Enums.MovimentType.Out,
-                    UserId = Guid.Parse("F9FCC5A4-CA56-41B2-A189-A7E83ED13BB4"),
+                    UserId = Guid.Parse(User.Identity.GetId()),
                     Date = model.Date,
                     MovimentProducts = MovimentProductList,
                 });

@@ -22,14 +22,19 @@ namespace InventoryControlTRD.Infrastructure.Data.Repositories
             _data.Execute("insert into \"User\"(Id,UserName,Password,RoleId) values(@Id,@UserName,@Password,@RoleId)",obj);
         }
 
-        public Task<IEnumerable<User>> GetAllAsync()
+        public async Task<IEnumerable<User>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _data.QueryAsync("select * from \"User\"");
         }
 
         public Task<User> GetByIdAsync(Guid? id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<User> GetByNickName(string nickName)
+        {
+            return await _data.QuerySingleAsync("select * from \"User\" where UserName = @Nick",new {Nick = nickName});
         }
 
         public void RemoveAsync(User obj)

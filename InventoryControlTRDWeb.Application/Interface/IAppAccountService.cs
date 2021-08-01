@@ -10,14 +10,9 @@ namespace InventoryControlTRDWeb.Application.Interface
     public interface IAppAccountService
     {
         void CreateAccount(AccountDto user);
-        void RemoveUser(Guid? id);
-        void UpdateUser(AccountDto user);
-        Task<UserDto> GetUserById(Guid? id);
-        Task<UserDto> GetUserByNickName(string nickName);
-
+        Task<AccountDto> GetAccountNickName(string nickName);
         Task<IEnumerable<RoleDto>> GetAllRoles();
+        Task<IEnumerable<UserDto>> GetAllAccounts();
         Task<bool> LogonIsValid(UserDto user);
-        Task<RoleDto> GetRoleByUserId(Guid? id);
-        Task<RoleDto> GetRoleByNickName(string nickName);
     }
 }

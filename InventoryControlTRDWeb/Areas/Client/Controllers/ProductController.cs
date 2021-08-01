@@ -1,6 +1,7 @@
 ﻿using InventoryControlTRDWeb.Application.Dto;
 using InventoryControlTRDWeb.Application.Interface;
 using InventoryControlTRDWeb.Areas.Client.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 namespace InventoryControlTRDWeb.Areas.Client.Controllers
 {
     [Area("Client")]
+    [Authorize(Roles = "Manager,User,Administrator")]
     public class ProductController : Controller
     {
         private readonly IAppProductService _productService;
@@ -22,9 +24,6 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
 
         public async Task<IActionResult> List() 
         {
-            //SetSession(".listproduct", null);
-            //_appAccountService.CreateAccount(new AccountDto()); //Isso ira sair
-
             ViewBag.Role = "Administrator";
             return View(new ProductListViewModel(await _productService.GetAllAsync())); 
         }

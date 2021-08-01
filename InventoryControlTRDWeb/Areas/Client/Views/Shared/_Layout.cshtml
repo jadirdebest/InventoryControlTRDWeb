@@ -50,7 +50,7 @@
                         </li>
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
-                        <a style="float:right" class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Logout">Logout</a>
+                        <a style="float:right" class="nav-link text-dark" asp-area="Client" asp-controller="Login" asp-action="Logout">Logout</a>
                     </form>
                 </div>
             </div>
@@ -71,9 +71,11 @@
             &copy; 2021 - Inventory Control - <a href="#">Privacy</a>
         </div>
     </footer>
-    
+
     <script src="~/lib/jquery-mask/jquery.mask.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>

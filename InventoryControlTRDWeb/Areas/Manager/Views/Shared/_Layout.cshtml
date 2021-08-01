@@ -45,7 +45,7 @@
                                 Requisição
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" asp-area="Client" asp-controller="Moviment" asp-action="ProductRequest">Retirada de Produtos</a>
+                                <a class="dropdown-item" asp-area="Client" asp-controller="Request" asp-action="ProductRequest">Retirada de Produtos</a>
                             </div>
                         </li>
                     </ul>
@@ -74,6 +74,8 @@
 
     <script src="~/lib/jquery-mask/jquery.mask.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>

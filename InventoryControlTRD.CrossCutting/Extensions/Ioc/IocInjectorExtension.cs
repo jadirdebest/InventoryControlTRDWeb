@@ -14,6 +14,8 @@ namespace InventoryControlTRD.CrossCutting.Extensions.Ioc
         public static void AddEssentialsServices(this IServiceCollection services)
         {
             services.AddScoped(typeof(IDataCore<>), typeof(DataCore<>));
+            services.AddSingleton<IAppSecurityService, AppSecurityService>();
+
             AddProductService(services);
             AddSubProductService(services);
             AddInventoryService(services);

@@ -1,5 +1,6 @@
 ﻿using InventoryControlTRDWeb.Application.Interface;
 using InventoryControlTRDWeb.Areas.Manager.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 namespace InventoryControlTRDWeb.Areas.Manager.Controllers
 {
     [Area("Manager")]
+    [Authorize(Roles = "Manager,Administrator")]
     public class ReportController : Controller
     {
         private readonly IAppReportService _reportService;

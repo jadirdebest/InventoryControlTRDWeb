@@ -1,6 +1,7 @@
 ﻿using InventoryControlTRDWeb.Application.Dto;
 using InventoryControlTRDWeb.Application.Interface;
 using InventoryControlTRDWeb.Areas.Client.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 namespace InventoryControlTRDWeb.Areas.Client.Controllers
 {
     [Area("Client")]
+    [Authorize(Roles = "Manager,User,Administrator")]
     public class SubProductController : Controller
     {
         private readonly IAppProductService _productService;

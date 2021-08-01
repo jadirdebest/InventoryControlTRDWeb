@@ -15,7 +15,12 @@ namespace InventoryControlTRD.Domain.Services
 
         public UserService(IUserRepository repo) : base(repo)
         {
+            _repo = repo;
+        }
 
+        public async Task<User> GetByNickName(string nickName)
+        {
+            return await _repo.GetByNickName(nickName);
         }
     }
 }

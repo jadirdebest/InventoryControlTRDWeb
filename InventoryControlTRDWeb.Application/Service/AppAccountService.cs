@@ -14,32 +14,38 @@ namespace InventoryControlTRDWeb.Application.Service
     public class AppAccountService : IAppAccountService
     {
         private readonly IMapper _mapper;
+        private readonly IAppSecurityService _securityService;
         private readonly IUserService _userService;
         private readonly IRoleService _roleService;
 
-        public AppAccountService(IMapper mapper, IUserService userService , IRoleService roleService )
+        public AppAccountService(IMapper mapper, IAppSecurityService securityService, IUserService userService , IRoleService roleService )
         {
             _mapper = mapper;
+            _securityService = securityService;
             _userService = userService;
             _roleService = roleService;
         }
 
 
-        public void CreateAccount(AccountDto user)
+        public void CreateAccount(AccountDto account)
         {
-            //_roleService.Add(new Role() { });
             _userService.Add(new User()
             {
                 Id = Guid.NewGuid(),
-                UserName = "admin",
-                Password = "asdasdasdas",
-                RoleId = Guid.Parse("1188C8F0-7FDC-4B13-A151-CBD0D06A47B8")
+                UserName = account.User.UserName,
+                Password = _securityService.CreateMD5(account.User.Password),
+                RoleId = account.User.RoleId
             });
         }
 
-        public Task<RoleDto> GetRoleByNickName(string nickName)
+        public async Task<AccountDto> GetAccountNickName(string nickName)
         {
-            throw new NotImplementedException();
+            var user = _mapper.Map<UserDto>(await _userService.GetByNickName(nickName));
+            return new AccountDto()
+            {
+                User = user,
+                Role = _mapper.Map<RoleDto>(await _roleService.GetByIdAsync(user.RoleId))
+            };
         }
 
         public Task<RoleDto> GetRoleByUserId(Guid? id)
@@ -67,18 +73,22 @@ namespace InventoryControlTRDWeb.Application.Service
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<RoleDto>> GetAllRoles()
+        public async Task<IEnumerable<RoleDto>> GetAllRoles()
         {
-            throw new NotImplementedException();
+            return _mapper.Map<IEnumerable<RoleDto>>(await _roleService.GetAllAsync());
         }
 
-        public Task<bool> LogonIsValid(UserDto user)
+        public async Task<bool> LogonIsValid(UserDto user)
         {
-            throw new NotImplementedException();
+            var userResponse = await _userService.GetByNickName(user.UserName);
+            if (userResponse == null) return false;
 
-            //var userResponse = await _serviceUser.GetByUserOrEmail(user.Email);
-            //if (userResponse == null) return false;
-            //return _md5Service.MD5IsMatch(user.Password, userResponse.Password);
+            return _securityService.MD5IsMatch(user.Password, userResponse.Password);
+        }
+
+        public async Task<IEnumerable<UserDto>> GetAllAccounts()
+        {
+            return _mapper.Map<IEnumerable<UserDto>>(await _userService.GetAllAsync());
         }
     }
 }
