@@ -11,13 +11,13 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
 {
     public class RequestBaseController : Controller
     {
-        protected List<MovimentProductDto> MovimentProductList
+        protected List<RequestProductDto> MovimentProductList
         {
             get => GetListSessionRequest();
             set => SetListSessionRequest(value);
         }
 
-        protected void AddMovimentRequest(MovimentProductDto request)
+        protected void AddMovimentRequest(RequestProductDto request)
         {
             var temp = MovimentProductList;
             temp.Add(request);
@@ -30,14 +30,14 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
             temp.Clear();
             MovimentProductList = temp;
         }
-        private List<MovimentProductDto> GetListSessionRequest()
+        private List<RequestProductDto> GetListSessionRequest()
         {
             return GetSession(".listproduct") == null ?
-              new List<MovimentProductDto>() :
-              JsonSerializer.Deserialize<List<MovimentProductDto>>(GetSession(".listproduct"));
+              new List<RequestProductDto>() :
+              JsonSerializer.Deserialize<List<RequestProductDto>>(GetSession(".listproduct"));
         }
 
-        private void SetListSessionRequest(List<MovimentProductDto> list)
+        private void SetListSessionRequest(List<RequestProductDto> list)
         {
             SetSession(".listproduct", list);
         }

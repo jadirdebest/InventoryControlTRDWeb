@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InventoryControlTRDWeb.Application.Dto
 {
-    public class MovimentDto : BaseDto
+    public class RequestDto : BaseDto
     {
         public Guid ProductId { get; set; }
         public Guid? UserId { get; set; }
@@ -15,6 +15,6 @@ namespace InventoryControlTRDWeb.Application.Dto
         public decimal TotalCostPrice { get => MovimentProducts != null ? MovimentProducts.Sum(a => a.SubTotalCostPrice) : 0; }
         public decimal TotalSalePrice { get => MovimentProducts != null ? MovimentProducts.Sum(a => a.SubTotalSalePrice) : 0; }
         public MovimentType MovimentType { get; set; }
-        public IEnumerable<MovimentProductDto> MovimentProducts { get; set; }
+        public IEnumerable<RequestProductDto> MovimentProducts { get; set; }
     }
 }

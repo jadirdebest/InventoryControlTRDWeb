@@ -19,13 +19,13 @@ namespace InventoryControlTRD.Domain.Services
         }
         public IEnumerable<Report> GetRequestReport(DateTime startDate, DateTime finalDate)
         {
-            if (startDate.CompareTo(finalDate) > 1) throw new Exception("");
+            if (startDate.CompareTo(finalDate) > 1) throw new Exception("A data de Início não pode ser depois que o fim.");
             return _repo.GetRequestReport(startDate, finalDate);
         }
 
         public IEnumerable<Report> GetInventoryOutReport(DateTime startDate, DateTime finalDate)
         {
-            if (startDate.CompareTo(finalDate) > 1) throw new Exception("");
+            if (startDate.CompareTo(finalDate) > 1) throw new Exception("A data de Início não pode ser depois que o fim.");
             return _repo.GetInventoryOutReport(startDate, finalDate);
         }
     }

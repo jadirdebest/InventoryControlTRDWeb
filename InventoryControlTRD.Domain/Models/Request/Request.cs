@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InventoryControlTRD.Domain.Models
 {
-    public class Moviment : Base
+    public class Request : Base
     {
         public Guid? UserId { get; set; }
         public decimal TotalCostPrice { get; set; }

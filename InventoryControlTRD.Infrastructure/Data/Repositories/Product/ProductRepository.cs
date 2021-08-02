@@ -35,7 +35,7 @@ namespace InventoryControlTRD.Infrastructure.Data.Repositories
         {
             return _data.QuerySingleAsync(@"select xa.Id, xa.Name,xa.CostPrice,xa.SalePrice,xa.Type,xa.Composite,xa.CreatedOn,xa.ModifiedOn,xa.Actived
                                             from Product xa
-                                            where xa.Composite = 0 and xa.Id =  @Id
+                                            where xa.Id = @Id
                                             union 
                                             select distinct xb.ProductId, xa.Name,(
                                             	select Sum(xa.CostPrice * xb.Amount)as CostPrice

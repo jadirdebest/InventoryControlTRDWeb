@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace InventoryControlTRD.Domain.Core.Interfaces.Services
 {
-    public interface IMovimentProductService : IBaseService<MovimentProduct>
+    public interface IRequestProductService : IBaseService<RequestProduct>
     {
-        void Add(IEnumerable<MovimentProduct> productlist);
+        void Add(IEnumerable<RequestProduct> productlist);
         
     }
 }

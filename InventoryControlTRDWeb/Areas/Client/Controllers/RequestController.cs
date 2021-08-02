@@ -19,10 +19,10 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
     {
         private readonly IAppProductService _productService;
         private readonly IAppInventoryService _inventoryService;
-        private readonly IAppMovimentService _movimentService;
+        private readonly IAppRequestService _movimentService;
         
         
-        public RequestController(IAppProductService productService, IAppInventoryService inventoryService, IAppMovimentService movimentService)
+        public RequestController(IAppProductService productService, IAppInventoryService inventoryService, IAppRequestService movimentService)
         {
             _productService = productService;
             _inventoryService = inventoryService;
@@ -30,13 +30,13 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddProductMoviment(AddMovimentViewModel model)
+        public async Task<IActionResult> AddProductMoviment(AddRequestViewModel model)
         {
             try
             {
                 var product = await _productService.GetById(model.ProductId);
 
-                AddMovimentRequest(new MovimentProductDto()
+                AddMovimentRequest(new RequestProductDto()
                 {
                     Amount = model.Amount,
                     Product = product,
@@ -57,7 +57,7 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
         {
             try
             {
-                return View(new MovimentViewModel((await _productService.GetAllAsync()).Where(a => a.Actived) , MovimentProductList));
+                return View(new RequestViewModel((await _productService.GetAllAsync()).Where(a => a.Actived) , MovimentProductList));
             }
             catch (Exception ex)
             {
@@ -68,11 +68,11 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ProductRequest(MovimentViewModel model)
+        public async Task<IActionResult> ProductRequest(RequestViewModel model)
         {
             try
             {
-                _movimentService.AddMoviment(new MovimentDto()
+                _movimentService.AddMoviment(new RequestDto()
                 {
                     Id = Guid.NewGuid(),
                     MovimentType = Application.Enums.MovimentType.Out,
@@ -83,7 +83,7 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
 
                 ClearMovimentRequest();
                 ViewBag.Success = "Requisição Realizado com sucesso, os produtos requisitados já foram baixados do estoque";
-                return View(new MovimentViewModel(await _productService.GetAllAsync(), MovimentProductList));
+                return View(new RequestViewModel(await _productService.GetAllAsync(), MovimentProductList));
             }
             catch (Exception)
             {

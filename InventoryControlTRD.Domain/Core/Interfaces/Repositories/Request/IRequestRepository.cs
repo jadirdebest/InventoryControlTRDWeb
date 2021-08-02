@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace InventoryControlTRD.Domain.Core.Interfaces.Repositories
 {
-    public interface IMovimentProductRepository : IBaseRepository<MovimentProduct>
+    public interface IRequestRepository : IBaseRepository<Request>
     {
-        void Add(IEnumerable<MovimentProduct> productlist);
+        Task<Request> AddWithReturnAsync(Request obj);
     }
 }

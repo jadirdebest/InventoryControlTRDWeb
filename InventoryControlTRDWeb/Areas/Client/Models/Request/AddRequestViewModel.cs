@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace InventoryControlTRDWeb.Areas.Client.Models
 {
-    public class AddMovimentViewModel
+    public class AddRequestViewModel
     {
         public Guid? ProductId { get; set; }
         public int Amount { get; set; }

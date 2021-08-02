@@ -7,21 +7,21 @@ using System.Threading.Tasks;
 
 namespace InventoryControlTRDWeb.Areas.Client.Models
 {
-    public class MovimentViewModel
+    public class RequestViewModel
     {
-        public MovimentViewModel(Guid? productId, Guid? userId, MovimentType movimentType)
+        public RequestViewModel(Guid? productId, Guid? userId, MovimentType movimentType)
         {
             ProductId = productId;
             UserId = userId;
             MovimentType = movimentType;
         }
-        public MovimentViewModel(IEnumerable<ProductDto> productList, IEnumerable<MovimentProductDto> movimentProductList )
+        public RequestViewModel(IEnumerable<ProductDto> productList, IEnumerable<RequestProductDto> movimentProductList )
         {
             ProductList = productList;
             MovimentProductList = movimentProductList;
         }
 
-        public MovimentViewModel()
+        public RequestViewModel()
         {
 
         }
@@ -36,7 +36,7 @@ namespace InventoryControlTRDWeb.Areas.Client.Models
         public MovimentType MovimentType { get; set; }
 
         public IEnumerable<ProductDto> ProductList { get; set; }
-        public IEnumerable<MovimentProductDto> MovimentProductList { get; set; }
+        public IEnumerable<RequestProductDto> MovimentProductList { get; set; }
 
     }
 }

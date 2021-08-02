@@ -45,14 +45,14 @@ namespace InventoryControlTRD.CrossCutting.Extensions.Ioc
         }
         public static void AddMovimentService(this IServiceCollection services)
         {
-            services.AddScoped<IMovimentRepository, MovimentRepository>();
-            services.AddScoped<IMovimentService, MovimentService>();
-            services.AddScoped<IAppMovimentService, AppMovimentService>();
+            services.AddScoped<IRequestRepository, RequestRepository>();
+            services.AddScoped<IRequestService, RequestService>();
+            services.AddScoped<IAppRequestService, AppRequestService>();
         }
         public static void AddMovimentProductService(this IServiceCollection services)
         {
-            services.AddScoped<IMovimentProductRepository, MovimentProductRepository>();
-            services.AddScoped<IMovimentProductService, MovimentProductService>();
+            services.AddScoped<IRequestProductRepository, RequestProductRepository>();
+            services.AddScoped<IRequestProductService, RequestProductService>();
         }
         public static void AddAccountService(this IServiceCollection services)
         {

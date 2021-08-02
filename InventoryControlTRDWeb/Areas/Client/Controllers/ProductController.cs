@@ -40,7 +40,7 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
                 _productService.Save(new ProductDto(model.Id,model.Name,model.Composite,Decimal.Parse(model.CostPrice),Decimal.Parse(model.SalePrice),model.Active,model.Type));
                 return RedirectToAction("List");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

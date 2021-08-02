@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace InventoryControlTRD.Domain.Services
 {
-    public class MovimentProductService : BaseService<MovimentProduct> , IMovimentProductService
+    public class RequestProductService : BaseService<RequestProduct> , IRequestProductService
     {
-        private readonly IMovimentProductRepository _repo;
-        public MovimentProductService(IMovimentProductRepository repo) : base(repo)
+        private readonly IRequestProductRepository _repo;
+        public RequestProductService(IRequestProductRepository repo) : base(repo)
         {
             _repo = repo;
         }
 
-        public void Add(IEnumerable<MovimentProduct> productlist)
+        public void Add(IEnumerable<RequestProduct> productlist)
         {
             _repo.Add(productlist);
         }

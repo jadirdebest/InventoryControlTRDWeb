@@ -21,9 +21,11 @@ namespace InventoryControlTRDWeb.Areas.Client.Models
         [Required(ErrorMessage = "Campo Obrigatório!")]
         public bool Composite { get; set; }
 
+        [Required(ErrorMessage = "Campo Obrigatório!")]
+        public string CostPrice { get; set; }
 
-        public string CostPrice { get; set; } = "0,00";
-        public string SalePrice { get; set; } = "0,00";
+        [Required(ErrorMessage = "Campo Obrigatório!")]
+        public string SalePrice { get; set; } 
         public ProductType Type { get; set; }
 
         public ProductViewModel()

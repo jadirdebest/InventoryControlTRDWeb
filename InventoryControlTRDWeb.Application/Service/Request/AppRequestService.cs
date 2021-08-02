@@ -11,19 +11,19 @@ using System.Threading.Tasks;
 
 namespace InventoryControlTRDWeb.Application.Service
 {
-    public class AppMovimentService : IAppMovimentService
+    public class AppRequestService : IAppRequestService
     {
         private readonly IMapper _mapper;
-        private readonly IMovimentService _movimentService;
-        private readonly IMovimentProductService _movimentProductService;
+        private readonly IRequestService _movimentService;
+        private readonly IRequestProductService _movimentProductService;
         private readonly IInventoryService _inventoryService;
         private readonly IProductService _productService;
         private readonly ISubProductService _subProductService;
 
-        public AppMovimentService(
+        public AppRequestService(
             IMapper mapper, 
-            IMovimentService movimentService, 
-            IMovimentProductService movimentProductService, 
+            IRequestService movimentService, 
+            IRequestProductService movimentProductService, 
             IInventoryService inventoryService,
             IProductService productService,
             ISubProductService subProductService
@@ -37,7 +37,7 @@ namespace InventoryControlTRDWeb.Application.Service
             _subProductService = subProductService;
         }
 
-        public void AddMoviment(MovimentDto obj)
+        public void AddMoviment(RequestDto obj)
         {
             try
             {
@@ -51,17 +51,17 @@ namespace InventoryControlTRDWeb.Application.Service
             }
         }
 
-        private Guid? CreateNewMoviment(MovimentDto obj)
+        private Guid? CreateNewMoviment(RequestDto obj)
         {
-            var moviment = _movimentService.AddWithReturnAsync(_mapper.Map<Moviment>(obj)).Result;
+            var moviment = _movimentService.AddWithReturnAsync(_mapper.Map<Request>(obj)).Result;
             if (moviment == null) throw new Exception("A movimentação de estoque não foi realizado");
             return moviment.Id;
         }
-        private void AddProductsInMoviment(MovimentDto obj,Guid? id)
+        private void AddProductsInMoviment(RequestDto obj,Guid? id)
         {
             _movimentProductService.Add(GetMovimenProductList(obj,id));
         }
-        private void UpdateInventory(MovimentDto obj)
+        private void UpdateInventory(RequestDto obj)
         {
             List<Inventory> InventoryProductsUpdateList = new List<Inventory>();
 
@@ -74,10 +74,10 @@ namespace InventoryControlTRDWeb.Application.Service
 
             _inventoryService.SubtractAmountList(InventoryProductsUpdateList);
         }
-        private IEnumerable<MovimentProduct> GetMovimenProductList (MovimentDto moviment,Guid? id)
+        private IEnumerable<RequestProduct> GetMovimenProductList (RequestDto moviment,Guid? id)
         {
             foreach (var item in moviment.MovimentProducts)
-                yield return new MovimentProduct()
+                yield return new RequestProduct()
                 {
                     Id = id,
                     Amount = item.Amount,

@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace InventoryControlTRD.Domain.Services
 {
-    public class MovimentService : BaseService<Moviment> , IMovimentService
+    public class RequestService : BaseService<Request> , IRequestService
     {
-        private readonly IMovimentRepository _repo;
+        private readonly IRequestRepository _repo;
 
-        public MovimentService(IMovimentRepository repo) : base(repo)
+        public RequestService(IRequestRepository repo) : base(repo)
         {
             _repo = repo;
         }
 
-        public async  Task<Moviment> AddWithReturnAsync(Moviment obj)
+        public async  Task<Request> AddWithReturnAsync(Request obj)
         {
             return await _repo.AddWithReturnAsync(obj);
         }

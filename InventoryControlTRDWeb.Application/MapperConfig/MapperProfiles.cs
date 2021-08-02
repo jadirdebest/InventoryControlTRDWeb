@@ -17,11 +17,11 @@ namespace InventoryControlTRDWeb.Application.MapperConfig
             CreateMap<Inventory, InventoryDto>();
             CreateMap<InventoryDto, Inventory>();
 
-            CreateMap<Moviment, MovimentDto>();
-            CreateMap<MovimentDto, Moviment>();
+            CreateMap<Request, RequestDto>();
+            CreateMap<RequestDto, Request>();
 
-            CreateMap<MovimentProduct, MovimentProductDto>();
-            CreateMap<MovimentProductDto, MovimentProduct>();
+            CreateMap<RequestProduct, RequestProductDto>();
+            CreateMap<RequestProductDto, RequestProduct>();
 
             CreateMap<User, UserDto>();
             CreateMap<UserDto, User>();

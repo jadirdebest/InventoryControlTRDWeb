@@ -62,7 +62,7 @@
             @foreach (var subProduct in Model.SubProductList)
             {
                 <tr>
-                    <td>@(Model.ProductList.Where(a => a.Id == subProduct.SubProductId).FirstOrDefault()?.Name)</td>
+                    <td>@(Model.ProductList.Where(a => a.Id == subProduct.Id).FirstOrDefault()?.Name)</td>
                     <td>@subProduct.Amount</td>
                 </tr>
             }

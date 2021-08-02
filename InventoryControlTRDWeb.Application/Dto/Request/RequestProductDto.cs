@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InventoryControlTRDWeb.Application.Dto
 {
-    public class MovimentProductDto
+    public class RequestProductDto
     {
         public Guid? Id { get; set; }
         public Guid? ProductId { get; set; }

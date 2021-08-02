@@ -44,12 +44,16 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
 
                 ViewBag.ReturnUrl = ReturnUrl;
 
-                //Apenas para facilitar o login
-                if (model.Login.Equals("admin") && model.Password.Equals("admin"))
+                //Apenas para facilitar o login, caso não tenho o usuário no banco de dados
+                if (false)
                 {
-                    SignIn("admin", "Administrator", "F9FCC5A4-CA56-41B2-A189-A7E83ED13BB4");
-                    return Redirect("/Manager/Dashboard/Home");
+                    if (model.Login.Equals("admin") && model.Password.Equals("admin"))
+                    {
+                        SignIn("admin", "Administrator", "F9FCC5A4-CA56-41B2-A189-A7E83ED13BB4");
+                        return Redirect("/Manager/Dashboard/Home");
+                    }
                 }
+              
 
                 var acessGranted = await _serviceAccount.LogonIsValid(new UserDto(model.Login, model.Password));
                 if (!acessGranted)
@@ -60,7 +64,7 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
 
 
                 var account = await _serviceAccount.GetAccountNickName(model.Login);
-                SignIn(model.Login, account.User.UserName,account.User.Id.ToString());
+                SignIn(model.Login, account.Role.Name,account.User.Id.ToString());
 
                 if (string.IsNullOrEmpty(ReturnUrl))
                 {

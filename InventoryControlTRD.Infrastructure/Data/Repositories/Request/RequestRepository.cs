@@ -9,48 +9,48 @@ using System.Threading.Tasks;
 
 namespace InventoryControlTRD.Infrastructure.Data.Repositories
 {
-    public class MovimentRepository : IBaseRepository<Moviment>, IMovimentRepository
+    public class RequestRepository : IBaseRepository<Request>, IRequestRepository
     {
-        private readonly IDataCore<Moviment> _data;
+        private readonly IDataCore<Request> _data;
 
-        public MovimentRepository(IDataCore<Moviment> data)
+        public RequestRepository(IDataCore<Request> data)
         {
             _data = data;
         }
 
-        public void AddAsync(Moviment obj)
+        public void AddAsync(Request obj)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<Moviment> AddWithReturnAsync(Moviment obj)
+        public async Task<Request> AddWithReturnAsync(Request obj)
         {
-            await _data.ExecuteAsync(@"insert into Moviment(Id,UserId,TotalCostPrice,TotalSalePrice,MovimentType,Date,CreatedOn) 
+            await _data.ExecuteAsync(@"insert into Request(Id,UserId,TotalCostPrice,TotalSalePrice,MovimentType,Date,CreatedOn) 
                                         values(@Id,@UserId,@TotalCostPrice,@TotalSalePrice,@MovimentType,@Date,sysdatetime())",obj);
             return obj;
         }
 
-        public Task<IEnumerable<Moviment>> GetAllAsync()
+        public Task<IEnumerable<Request>> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<Moviment> GetByIdAsync(Guid? id)
+        public Task<Request> GetByIdAsync(Guid? id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<Moviment>> GetMovementsByDateAsync(DateTime startDate, DateTime finalDate)
+        public async Task<IEnumerable<Request>> GetMovementsByDateAsync(DateTime startDate, DateTime finalDate)
         {
-            return await _data.QueryAsync(@"select * from Moviment where Date between @StartDate and @FinalDate", new { StartDate = startDate, FinalDate = finalDate } );
+            return await _data.QueryAsync(@"select * from Request where Date between @StartDate and @FinalDate", new { StartDate = startDate, FinalDate = finalDate } );
         }
 
-        public void RemoveAsync(Moviment obj)
+        public void RemoveAsync(Request obj)
         {
             throw new NotImplementedException();
         }
 
-        public void UpdateAsync(Moviment obj)
+        public void UpdateAsync(Request obj)
         {
             throw new NotImplementedException();
         }

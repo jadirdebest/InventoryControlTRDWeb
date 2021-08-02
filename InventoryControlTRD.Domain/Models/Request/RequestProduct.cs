@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InventoryControlTRD.Domain.Models
 {
-    public class MovimentProduct
+    public class RequestProduct
     {
         public Guid? Id { get; set; }
         public Guid? ProductId { get; set; }

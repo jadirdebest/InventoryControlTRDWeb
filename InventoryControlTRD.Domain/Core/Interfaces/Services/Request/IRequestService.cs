@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace InventoryControlTRD.Domain.Core.Interfaces.Services
 {
-    public interface IMovimentService : IBaseService<Moviment>
+    public interface IRequestService : IBaseService<Request>
     {
-        Task<Moviment> AddWithReturnAsync(Moviment obj);
+        Task<Request> AddWithReturnAsync(Request obj);
     }
 }

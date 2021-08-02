@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace InventoryControlTRDWeb.Application.Interface
 {
-    public interface IAppMovimentService
+    public interface IAppRequestService
     {
-        void AddMoviment(MovimentDto obj);
+        void AddMoviment(RequestDto obj);
     }
 }

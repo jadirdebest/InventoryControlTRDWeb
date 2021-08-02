@@ -9,42 +9,42 @@ using System.Threading.Tasks;
 
 namespace InventoryControlTRD.Infrastructure.Data.Repositories
 {
-    public class MovimentProductRepository : IBaseRepository<MovimentProduct>, IMovimentProductRepository
+    public class RequestProductRepository : IBaseRepository<RequestProduct>, IRequestProductRepository
     {
-        private readonly IDataCore<MovimentProduct> _data;
-        public MovimentProductRepository(IDataCore<MovimentProduct> data)
+        private readonly IDataCore<RequestProduct> _data;
+        public RequestProductRepository(IDataCore<RequestProduct> data)
         {
             _data = data;
         }
 
-        public async void Add(IEnumerable<MovimentProduct> productlist)
+        public async void Add(IEnumerable<RequestProduct> productlist)
         {
-            await _data.ExecuteMultipleAsync(@"insert into MovimentProduct(Id,ProductId,Amount,SubTotalCostPrice,SubTotalSalePrice)
+            await _data.ExecuteMultipleAsync(@"insert into RequestProduct(Id,ProductId,Amount,SubTotalCostPrice,SubTotalSalePrice)
                                        values(@Id,@ProductId,@Amount,@SubTotalCostPrice,@SubTotalSalePrice)", productlist);
         }
 
-        public async void AddAsync(MovimentProduct obj)
+        public async void AddAsync(RequestProduct obj)
         {
-            await _data.ExecuteAsync(@"insert into MovimentProduct(Id,ProductId,Amount,SubTotalCostPrice,SubTotalSalePrice)
+            await _data.ExecuteAsync(@"insert into RequestProduct(Id,ProductId,Amount,SubTotalCostPrice,SubTotalSalePrice)
                                        values(@Id,@ProductId,@Amount,@SubTotalCostPrice,@SubTotalSalePrice)", obj);
         }
 
-        public Task<IEnumerable<MovimentProduct>> GetAllAsync()
+        public Task<IEnumerable<RequestProduct>> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<MovimentProduct> GetByIdAsync(Guid? id)
+        public Task<RequestProduct> GetByIdAsync(Guid? id)
         {
             throw new NotImplementedException();
         }
 
-        public void RemoveAsync(MovimentProduct obj)
+        public void RemoveAsync(RequestProduct obj)
         {
             throw new NotImplementedException();
         }
 
-        public void UpdateAsync(MovimentProduct obj)
+        public void UpdateAsync(RequestProduct obj)
         {
             throw new NotImplementedException();
         }
