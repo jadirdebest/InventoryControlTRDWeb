@@ -3,6 +3,7 @@ using InventoryControlTRD.Domain.Core.Interfaces.Services;
 using InventoryControlTRD.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace InventoryControlTRD.Domain.Services
@@ -17,9 +18,9 @@ namespace InventoryControlTRD.Domain.Services
 
         public override void Add(Inventory obj)
         {
-            //var itemExist = _repo.GetByProductIdAsync(obj.ProductId).Result;
-            var itemExist = _repo.GetByProductIdAsync(obj.Product.Id).Result;
-            if (itemExist != null) throw new ArgumentException("Este produto já foi adicionado ao Estoque");
+            var itemExist = _repo.GetByProductIdAsync(obj.ProductId).Result;
+            //var itemExist = _repo.GetByProductIdAsync(obj.Product.Id).Result;
+            if (itemExist.Any()) throw new ArgumentException("Este produto já foi adicionado ao Estoque");
 
             _repo.AddAsync(obj);
         }

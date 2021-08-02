@@ -39,10 +39,11 @@ namespace InventoryControlTRDWeb.Application.Service
         public async Task<AccountDto> GetAccountNickName(string nickName)
         {
             var user = _mapper.Map<UserDto>(await _userService.GetByNickName(nickName));
+            var role = _mapper.Map<RoleDto>(await _roleService.GetByIdAsync(user.RoleId));
             return new AccountDto()
             {
                 User = user,
-                Role = _mapper.Map<RoleDto>(await _roleService.GetByIdAsync(user.RoleId))
+                Role = role
             };
         }
 

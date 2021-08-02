@@ -36,7 +36,6 @@ namespace InventoryControlTRD.Infrastructure.Data.Repositories
         }
         public async Task<IEnumerable<Inventory>> GetByProductIdAsync(Guid? id)
         {
-            //Testar
             return await _data.QueryAsync(@"select  xa.Id, xa.Amount,xa.Min,xa.Max 
                         from Inventory xa 
                         inner join Product xc on xc.Id = xa.ProductId

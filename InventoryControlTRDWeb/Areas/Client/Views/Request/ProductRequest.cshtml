@@ -38,6 +38,8 @@
     </div>
 </div>
 
+<p class="alert alert-info" id="msg_alert" style="display:none"></p>
+
 <h4>Requisição de Produto</h4>
 <hr />
 
@@ -96,9 +98,11 @@
         }).done(function (response) {
             if (response.success) {
                 LoadTableList();
-            } else {
-                $('#alert_msg').html(response.message).fadeIn(50);
-            }
-        }).fail((response) => console.log(response));
+            } 
+            $('#msg_alert').html(response.message).fadeIn(50);
+            setTimeout(() => { $('#msg_alert').fadeOut().html('') }, 3000);
+        }).fail((response) => {
+            console.log(response.message);
+        });
     }
 </script>

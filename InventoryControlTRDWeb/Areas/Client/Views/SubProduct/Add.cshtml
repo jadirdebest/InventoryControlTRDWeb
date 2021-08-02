@@ -24,10 +24,12 @@
                                 <option value="@product.Id">@product.Name</option>
                             }
                         </select>
+                        <span asp-validation-for="SubProductId" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label>Quantidade</label>
                         <input class="form-control form-control-sm" asp-for="Amount" />
+                        <span asp-validation-for="Amount" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="modal-footer">

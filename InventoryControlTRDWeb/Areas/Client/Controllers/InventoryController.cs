@@ -4,6 +4,7 @@ using InventoryControlTRDWeb.Areas.Client.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace InventoryControlTRDWeb.Areas.Client.Controllers
@@ -31,7 +32,7 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
             {
                 var simpleProductList = await _productService.GetAllSimpleProducts();
 
-                return View(new InventoryViewModel(simpleProductList));
+                return View(new InventoryViewModel(simpleProductList.Where(a => a.Actived)));
             }
             catch (Exception)
             {

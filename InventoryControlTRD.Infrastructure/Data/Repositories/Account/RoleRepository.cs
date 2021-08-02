@@ -28,7 +28,8 @@ namespace InventoryControlTRD.Infrastructure.Data.Repositories
 
         public async Task<Role> GetByIdAsync(Guid? id)
         {
-            return await _data.QuerySingleAsync("select * from Role where @Id = @ID", new { ID = id });
+            var response = await _data.QuerySingleAsync("select * from Role where Id = @ID", new { ID = id });
+            return response;
         }
 
         public void RemoveAsync(Role obj)
