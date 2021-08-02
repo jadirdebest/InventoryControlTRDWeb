@@ -46,7 +46,8 @@ namespace InventoryControlTRD.Infrastructure.Data.Repositories
                                             ) as CostPrice,xa.SalePrice,xa.Type,xa.Composite,xa.CreatedOn,xa.ModifiedOn,xa.Actived
                                             from Product xa
                                             inner join SubProduct xb on xa.Id = xb.ProductId
-                                            where xb.ProductId = @Id", new { Id = id });
+                                            where xb.ProductId = @Id
+                                            order by CostPrice desc ", new { Id = id });
         }
 
 

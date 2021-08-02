@@ -8,11 +8,11 @@
 
     <div class="form-group">
         <label>Data Inicial</label>
-        <input asp-for="StartDate" type="date" class="form-control" />
+        <input asp-for="StartDate" type="date" class="form-control form-control-sm" />
     </div>
     <div class="form-group">
         <label>Data Final</label>
-        <input asp-for="FinalDate"  type="date" class="form-control" />
+        <input asp-for="FinalDate"  type="date" class="form-control  form-control-sm" />
     </div>
 
     <button type="submit" class="btn btn-primary">Gerar</button>
@@ -21,7 +21,7 @@
 
 @if (Model != null)
 {
-    <table class="table table-bordered">
+    <table class="table table-bordered table-striped">
         <thead>
             <tr>
                 <th>Produto</th>
