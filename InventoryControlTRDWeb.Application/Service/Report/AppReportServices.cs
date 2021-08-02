@@ -3,9 +3,6 @@ using InventoryControlTRDWeb.Application.Dto;
 using InventoryControlTRDWeb.Application.Interface;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InventoryControlTRDWeb.Application.Service
 {
@@ -20,7 +17,7 @@ namespace InventoryControlTRDWeb.Application.Service
         public IEnumerable<RequestReportDto> GetRequestReport(DateTime startDate, DateTime finalDate)
         {
             var listMoviments = _reportService.GetRequestReport(startDate, finalDate);
-            foreach (var report in listMoviments) yield return new RequestReportDto(report.Date,report.Name,report.Amount,report.CostTotal,report.SaleTotal);
+            foreach (var report in listMoviments) yield return new RequestReportDto(report.Date, report.Name, report.Amount, report.CostTotal, report.SaleTotal);
         }
 
         public IEnumerable<InventoryOutReportDto> GetInventoryOutReport(DateTime startDate, DateTime finalDate)
@@ -29,7 +26,7 @@ namespace InventoryControlTRDWeb.Application.Service
             foreach (var report in listMoviments) yield return new InventoryOutReportDto(report.Date, report.Name, report.Amount, report.CostTotal);
         }
 
-        
+
 
     }
 }

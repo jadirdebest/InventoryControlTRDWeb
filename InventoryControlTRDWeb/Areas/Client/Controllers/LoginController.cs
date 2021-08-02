@@ -3,8 +3,6 @@ using InventoryControlTRDWeb.Application.Interface;
 using InventoryControlTRDWeb.Areas.Client.Models.Account;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace InventoryControlTRDWeb.Areas.Client.Controllers
@@ -53,7 +51,7 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
                         return Redirect("/Manager/Dashboard/Home");
                     }
                 }
-              
+
 
                 var acessGranted = await _serviceAccount.LogonIsValid(new UserDto(model.Login, model.Password));
                 if (!acessGranted)
@@ -64,7 +62,7 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
 
 
                 var account = await _serviceAccount.GetAccountNickName(model.Login);
-                SignIn(model.Login, account.Role.Name,account.User.Id.ToString());
+                SignIn(model.Login, account.Role.Name, account.User.Id.ToString());
 
                 if (string.IsNullOrEmpty(ReturnUrl))
                 {
@@ -82,7 +80,7 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
             {
                 throw;
             }
-           
+
         }
 
         public IActionResult Logout()

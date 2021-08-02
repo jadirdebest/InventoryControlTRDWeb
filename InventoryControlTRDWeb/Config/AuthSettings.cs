@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace InventoryControlTRDWeb.Config
 {
@@ -15,7 +12,7 @@ namespace InventoryControlTRDWeb.Config
             var authPropiets = new AuthenticationProperties
             {
                 ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(15),
-                IsPersistent = true, 
+                IsPersistent = true,
             };
 
             return authPropiets;

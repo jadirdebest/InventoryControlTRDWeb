@@ -4,8 +4,6 @@ using InventoryControlTRDWeb.Areas.Client.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace InventoryControlTRDWeb.Areas.Client.Controllers
@@ -50,10 +48,10 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
                 if (!ModelState.IsValid)
                 {
                     model.SimpleProductList = await _productService.GetAllSimpleProducts();
-                    return View(model); 
+                    return View(model);
                 }
 
-                _inventoryService.AddItem(new InventoryDto(model.ProductId,model.Amount,model.Min,model.Max));
+                _inventoryService.AddItem(new InventoryDto(model.ProductId, model.Amount, model.Min, model.Max));
                 return RedirectToAction("List");
 
             }

@@ -4,7 +4,6 @@ using InventoryControlTRDWeb.Areas.Client.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -28,14 +27,14 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
                 var product = await _productService.GetById(idProduct);
                 var listProducts = (await _productService.GetAllAsync()).Where(a => !a.Composite);
                 var listSubProducts = await _subProductService.GetByProductId(idProduct);
-                return View(new SubProductViewModel(product,listProducts,listSubProducts));
+                return View(new SubProductViewModel(product, listProducts, listSubProducts));
             }
             catch (Exception)
             {
 
                 throw;
             }
-            
+
         }
 
         [HttpPost]
@@ -43,7 +42,7 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
         {
             try
             {
-                await _subProductService.Save(new SubProductDto(subProduct.Product.Id,subProduct.SubProductId,subProduct.Amount));
+                await _subProductService.Save(new SubProductDto(subProduct.Product.Id, subProduct.SubProductId, subProduct.Amount));
 
 
                 return RedirectToAction("Add", new { idProduct = subProduct.Product.Id });

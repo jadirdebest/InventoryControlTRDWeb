@@ -3,7 +3,6 @@ using InventoryControlTRDWeb.Application.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace InventoryControlTRDWeb.Areas.Client.Models
 {
@@ -15,7 +14,7 @@ namespace InventoryControlTRDWeb.Areas.Client.Models
             UserId = userId;
             MovimentType = movimentType;
         }
-        public RequestViewModel(IEnumerable<ProductDto> productList, IEnumerable<RequestProductDto> movimentProductList )
+        public RequestViewModel(IEnumerable<ProductDto> productList, IEnumerable<RequestProductDto> movimentProductList)
         {
             ProductList = productList;
             MovimentProductList = movimentProductList;
@@ -30,7 +29,7 @@ namespace InventoryControlTRDWeb.Areas.Client.Models
         public Guid? UserId { get; set; }
 
         public DateTime Date { get; set; } = DateTime.Today;
-        public string TotalCostPrice { get => MovimentProductList != null ? MovimentProductList.Sum(a => a.SubTotalCostPrice).ToString("N2") : String.Empty ; }
+        public string TotalCostPrice { get => MovimentProductList != null ? MovimentProductList.Sum(a => a.SubTotalCostPrice).ToString("N2") : String.Empty; }
         public string TotalSalePrice { get => MovimentProductList != null ? MovimentProductList.Sum(a => a.SubTotalSalePrice).ToString("N2") : String.Empty; }
         public int Amount { get; set; }
         public MovimentType MovimentType { get; set; }

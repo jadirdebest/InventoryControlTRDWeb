@@ -3,12 +3,9 @@ using InventoryControlTRDWeb.Application.Dto;
 using InventoryControlTRDWeb.Application.Interface;
 using InventoryControlTRDWeb.Areas.Client.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace InventoryControlTRDWeb.Areas.Client.Controllers
@@ -20,8 +17,8 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
         private readonly IAppProductService _productService;
         private readonly IAppInventoryService _inventoryService;
         private readonly IAppRequestService _movimentService;
-        
-        
+
+
         public RequestController(IAppProductService productService, IAppInventoryService inventoryService, IAppRequestService movimentService)
         {
             _productService = productService;
@@ -52,19 +49,19 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
             }
         }
 
-     
+
         public async Task<IActionResult> ProductRequest()
         {
             try
             {
-                return View(new RequestViewModel((await _productService.GetAllAsync()).Where(a => a.Actived) , MovimentProductList));
+                return View(new RequestViewModel((await _productService.GetAllAsync()).Where(a => a.Actived), MovimentProductList));
             }
             catch (Exception ex)
             {
 
                 throw;
             }
-            
+
         }
 
         [HttpPost]

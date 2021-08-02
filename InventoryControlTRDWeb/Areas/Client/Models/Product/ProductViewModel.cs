@@ -1,9 +1,6 @@
 ﻿using InventoryControlTRDWeb.Application.Enums;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace InventoryControlTRDWeb.Areas.Client.Models
 {
@@ -15,7 +12,7 @@ namespace InventoryControlTRDWeb.Areas.Client.Models
         public bool Active { get; set; }
 
         [Required(ErrorMessage = "Campo Obrigatório!")]
-        [MaxLength(50,ErrorMessage = "Permitido no máximo 50 caracteres")]
+        [MaxLength(50, ErrorMessage = "Permitido no máximo 50 caracteres")]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Campo Obrigatório!")]
@@ -25,7 +22,7 @@ namespace InventoryControlTRDWeb.Areas.Client.Models
         public string CostPrice { get; set; }
 
         [Required(ErrorMessage = "Campo Obrigatório!")]
-        public string SalePrice { get; set; } 
+        public string SalePrice { get; set; }
         public ProductType Type { get; set; }
 
         public ProductViewModel()
@@ -33,7 +30,7 @@ namespace InventoryControlTRDWeb.Areas.Client.Models
 
         }
 
-        public ProductViewModel(Guid? id, bool active, string name,bool composite ,string costPrice, string salePrice, ProductType type)
+        public ProductViewModel(Guid? id, bool active, string name, bool composite, string costPrice, string salePrice, ProductType type)
         {
             Id = id;
             Active = active;

@@ -3,8 +3,6 @@ using InventoryControlTRD.Domain.Models;
 using InventoryControlTRD.Infrastructure.Data.Core;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace InventoryControlTRD.Infrastructure.Data.Repositories
@@ -20,7 +18,7 @@ namespace InventoryControlTRD.Infrastructure.Data.Repositories
         public async void AddAsync(Role obj)
         {
             obj.Id = Guid.NewGuid();
-            await _data.ExecuteAsync("insert into Role(Id,Name) values(@Id,@Name)",obj);
+            await _data.ExecuteAsync("insert into Role(Id,Name) values(@Id,@Name)", obj);
         }
 
         public async Task<IEnumerable<Role>> GetAllAsync()

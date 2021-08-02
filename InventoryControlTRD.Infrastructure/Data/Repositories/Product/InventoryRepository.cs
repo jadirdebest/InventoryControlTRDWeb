@@ -3,8 +3,6 @@ using InventoryControlTRD.Domain.Models;
 using InventoryControlTRD.Infrastructure.Data.Core;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace InventoryControlTRD.Infrastructure.Data.Repositories
@@ -26,7 +24,7 @@ namespace InventoryControlTRD.Infrastructure.Data.Repositories
         public async Task<IEnumerable<Inventory>> GetAllAsync()
         {
             return await _data.QueryAsync<Product>(@"select * from Inventory xa inner join Product xb on xa.ProductId = xb.Id",
-                (inventory,product) =>
+                (inventory, product) =>
                 {
                     inventory.Product = product;
                     return inventory;

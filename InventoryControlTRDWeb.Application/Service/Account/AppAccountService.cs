@@ -5,8 +5,6 @@ using InventoryControlTRDWeb.Application.Dto;
 using InventoryControlTRDWeb.Application.Interface;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace InventoryControlTRDWeb.Application.Service
@@ -18,7 +16,7 @@ namespace InventoryControlTRDWeb.Application.Service
         private readonly IUserService _userService;
         private readonly IRoleService _roleService;
 
-        public AppAccountService(IMapper mapper, IAppSecurityService securityService, IUserService userService , IRoleService roleService )
+        public AppAccountService(IMapper mapper, IAppSecurityService securityService, IUserService userService, IRoleService roleService)
         {
             _mapper = mapper;
             _securityService = securityService;

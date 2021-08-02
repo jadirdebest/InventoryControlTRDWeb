@@ -4,8 +4,6 @@ using InventoryControlTRDWeb.Areas.Manager.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace InventoryControlTRDWeb.Areas.Manager.Controllers
@@ -16,7 +14,7 @@ namespace InventoryControlTRDWeb.Areas.Manager.Controllers
     {
         private readonly IAppAccountService _serviceAccount;
 
-        public AccountController(IAppAccountService serviceAccount )
+        public AccountController(IAppAccountService serviceAccount)
         {
             _serviceAccount = serviceAccount;
         }
@@ -45,7 +43,7 @@ namespace InventoryControlTRDWeb.Areas.Manager.Controllers
             try
             {
                 _serviceAccount.CreateAccount(
-                    new AccountDto(new UserDto(model.NickName,model.Password,model.RoleProfile)));
+                    new AccountDto(new UserDto(model.NickName, model.Password, model.RoleProfile)));
             }
             catch (Exception ex)
             {

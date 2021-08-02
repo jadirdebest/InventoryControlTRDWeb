@@ -1,9 +1,5 @@
 ﻿using InventoryControlTRDWeb.Application.Enums;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InventoryControlTRDWeb.Application.Dto
 {
@@ -13,7 +9,7 @@ namespace InventoryControlTRDWeb.Application.Dto
         {
 
         }
-        public ProductDto(Guid? id, string name, bool composite,decimal costPrice, decimal salePrice, bool active , ProductType type)
+        public ProductDto(Guid? id, string name, bool composite, decimal costPrice, decimal salePrice, bool active, ProductType type)
         {
             Id = id;
             Name = name;

@@ -3,9 +3,6 @@ using InventoryControlTRD.Domain.Models;
 using InventoryControlTRD.Infrastructure.Data.Core;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InventoryControlTRD.Infrastructure.Data.Repositories
 {
@@ -24,7 +21,7 @@ namespace InventoryControlTRD.Infrastructure.Data.Repositories
                                     join RequestProduct xb on xa.Id = xb.Id
                                     join Product xc on xc.Id = xb.ProductId
                                     where xa.Date between @StartDate and @FinalDate
-                                    group by Name", 
+                                    group by Name",
                             new { StartDate = startDate, FinalDate = finalDate });
         }
 

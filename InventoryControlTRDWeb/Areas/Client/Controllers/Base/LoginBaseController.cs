@@ -2,11 +2,8 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace InventoryControlTRDWeb.Areas.Client.Controllers
 {
@@ -28,7 +25,7 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(identity), AuthSettings.AuthProperties);
         }
-        
+
         protected virtual async void SignOut()
         {
             await base.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);

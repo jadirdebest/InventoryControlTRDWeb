@@ -3,8 +3,6 @@ using InventoryControlTRD.Domain.Models;
 using InventoryControlTRD.Infrastructure.Data.Core;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace InventoryControlTRD.Infrastructure.Data.Repositories
@@ -19,7 +17,7 @@ namespace InventoryControlTRD.Infrastructure.Data.Repositories
         }
         public void AddAsync(User obj)
         {
-            _data.Execute("insert into \"User\"(Id,UserName,Password,RoleId) values(@Id,@UserName,@Password,@RoleId)",obj);
+            _data.Execute("insert into \"User\"(Id,UserName,Password,RoleId) values(@Id,@UserName,@Password,@RoleId)", obj);
         }
 
         public async Task<IEnumerable<User>> GetAllAsync()
@@ -34,7 +32,7 @@ namespace InventoryControlTRD.Infrastructure.Data.Repositories
 
         public async Task<User> GetByNickName(string nickName)
         {
-            return await _data.QuerySingleAsync("select * from \"User\" where UserName = @Nick",new {Nick = nickName});
+            return await _data.QuerySingleAsync("select * from \"User\" where UserName = @Nick", new { Nick = nickName });
         }
 
         public void RemoveAsync(User obj)

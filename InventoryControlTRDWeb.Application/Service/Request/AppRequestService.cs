@@ -5,9 +5,6 @@ using InventoryControlTRDWeb.Application.Dto;
 using InventoryControlTRDWeb.Application.Interface;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InventoryControlTRDWeb.Application.Service
 {
@@ -21,9 +18,9 @@ namespace InventoryControlTRDWeb.Application.Service
         private readonly ISubProductService _subProductService;
 
         public AppRequestService(
-            IMapper mapper, 
-            IRequestService movimentService, 
-            IRequestProductService movimentProductService, 
+            IMapper mapper,
+            IRequestService movimentService,
+            IRequestProductService movimentProductService,
             IInventoryService inventoryService,
             IProductService productService,
             ISubProductService subProductService
@@ -42,7 +39,7 @@ namespace InventoryControlTRDWeb.Application.Service
             try
             {
                 var id = CreateNewMoviment(obj);
-                AddProductsInMoviment(obj,id);
+                AddProductsInMoviment(obj, id);
                 UpdateInventory(obj);
             }
             catch (Exception)
@@ -57,9 +54,9 @@ namespace InventoryControlTRDWeb.Application.Service
             if (moviment == null) throw new Exception("A movimentação de estoque não foi realizado");
             return moviment.Id;
         }
-        private void AddProductsInMoviment(RequestDto obj,Guid? id)
+        private void AddProductsInMoviment(RequestDto obj, Guid? id)
         {
-            _movimentProductService.Add(GetMovimenProductList(obj,id));
+            _movimentProductService.Add(GetMovimenProductList(obj, id));
         }
         private void UpdateInventory(RequestDto obj)
         {
@@ -68,13 +65,13 @@ namespace InventoryControlTRDWeb.Application.Service
             foreach (var mvProduct in obj.MovimentProducts)
             {
                 var subProducts = _subProductService.GetSubProductsByProductIdAsync(mvProduct.Product.Id).Result;
-                foreach(var product in subProducts) 
+                foreach (var product in subProducts)
                     InventoryProductsUpdateList.Add(new Inventory() { ProductId = product.Id, Amount = mvProduct.Amount * product.Amount });
             }
 
             _inventoryService.SubtractAmountList(InventoryProductsUpdateList);
         }
-        private IEnumerable<RequestProduct> GetMovimenProductList (RequestDto moviment,Guid? id)
+        private IEnumerable<RequestProduct> GetMovimenProductList(RequestDto moviment, Guid? id)
         {
             foreach (var item in moviment.MovimentProducts)
                 yield return new RequestProduct()

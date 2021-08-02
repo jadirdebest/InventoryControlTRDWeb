@@ -3,8 +3,6 @@ using InventoryControlTRD.Domain.Models;
 using InventoryControlTRD.Infrastructure.Data.Core;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace InventoryControlTRD.Infrastructure.Data.Repositories
@@ -26,7 +24,7 @@ namespace InventoryControlTRD.Infrastructure.Data.Repositories
         public async Task<Request> AddWithReturnAsync(Request obj)
         {
             await _data.ExecuteAsync(@"insert into Request(Id,UserId,TotalCostPrice,TotalSalePrice,MovimentType,Date,CreatedOn) 
-                                        values(@Id,@UserId,@TotalCostPrice,@TotalSalePrice,@MovimentType,@Date,sysdatetime())",obj);
+                                        values(@Id,@UserId,@TotalCostPrice,@TotalSalePrice,@MovimentType,@Date,sysdatetime())", obj);
             return obj;
         }
 
@@ -42,7 +40,7 @@ namespace InventoryControlTRD.Infrastructure.Data.Repositories
 
         public async Task<IEnumerable<Request>> GetMovementsByDateAsync(DateTime startDate, DateTime finalDate)
         {
-            return await _data.QueryAsync(@"select * from Request where Date between @StartDate and @FinalDate", new { StartDate = startDate, FinalDate = finalDate } );
+            return await _data.QueryAsync(@"select * from Request where Date between @StartDate and @FinalDate", new { StartDate = startDate, FinalDate = finalDate });
         }
 
         public void RemoveAsync(Request obj)

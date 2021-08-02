@@ -1,19 +1,13 @@
+using InventoryControlTRD.CrossCutting.Extensions.Ioc;
+using InventoryControlTRD.Infrastructure.Configurations;
+using InventoryControlTRDWeb.Application.MapperConfig;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using AutoMapper;
-using InventoryControlTRD.CrossCutting.Extensions.Ioc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Globalization;
-using Microsoft.AspNetCore.Localization;
-using InventoryControlTRDWeb.Application.MapperConfig;
-using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace InventoryControlTRDWeb
 {
@@ -26,14 +20,18 @@ namespace InventoryControlTRDWeb
 
         public IConfiguration Configuration { get; }
 
-        
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddEssentialsServices(); 
+            services.AddEssentialsServices();
             services.AddAutoMapper(x => x.AddProfile(new MapperProfiles()));
 
             services.AddDistributedMemoryCache();
+
+            string dbConnectionString = this.Configuration.GetConnectionString("SqlConnectionString");
+            services.AddSingleton((sp) => new ConnectionProvider(dbConnectionString));
+
 
             services.AddSession(options =>
             {
@@ -48,6 +46,8 @@ namespace InventoryControlTRDWeb
                 opt.LoginPath = "/Client/Login/Logon";
                 opt.LogoutPath = "";
             });
+
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -73,7 +73,7 @@ namespace InventoryControlTRDWeb
             app.UseAuthorization();
 
             app.UseSession();
-            
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

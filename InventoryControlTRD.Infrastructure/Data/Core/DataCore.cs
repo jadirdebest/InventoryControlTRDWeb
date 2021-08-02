@@ -2,18 +2,21 @@
 using InventoryControlTRD.Infrastructure.Configurations;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
+using System.Data;
 using System.Threading.Tasks;
 
 namespace InventoryControlTRD.Infrastructure.Data.Core
 {
     public class DataCore<T> : IDataCore<T> where T : class
     {
+        private readonly ConnectionProvider _provider;
+        public DataCore(ConnectionProvider provider)
+        {
+            _provider = provider;
+        }
         public async Task ExecuteAsync(string query)
         {
-            using (SqlConnection conn = new SqlConnection(Connection.SqlConnectionString))
+            using (IDbConnection conn = _provider.GetDbConnection())
             {
                 conn.Open();
                 await conn.ExecuteAsync(query);
@@ -21,16 +24,16 @@ namespace InventoryControlTRD.Infrastructure.Data.Core
         }
         public async Task ExecuteAsync(string query, object obj)
         {
-            using (SqlConnection conn = new SqlConnection(Connection.SqlConnectionString))
+            using (IDbConnection conn = _provider.GetDbConnection())
             {
                 conn.Open();
-                await conn.ExecuteAsync(query,obj);
+                await conn.ExecuteAsync(query, obj);
             }
         }
 
         public async Task ExecuteMultipleAsync(string query, IEnumerable<object> objList)
         {
-            using (SqlConnection conn = new SqlConnection(Connection.SqlConnectionString))
+            using (IDbConnection conn = _provider.GetDbConnection())
             {
                 conn.Open();
                 await conn.ExecuteAsync(query, objList);
@@ -38,7 +41,7 @@ namespace InventoryControlTRD.Infrastructure.Data.Core
         }
         public void Execute(string query, object obj)
         {
-            using (SqlConnection conn = new SqlConnection(Connection.SqlConnectionString))
+            using (IDbConnection conn = _provider.GetDbConnection())
             {
                 conn.Open();
                 conn.Execute(query, obj);
@@ -46,7 +49,7 @@ namespace InventoryControlTRD.Infrastructure.Data.Core
         }
         public async Task<IEnumerable<T>> QueryAsync(string query)
         {
-            using (SqlConnection conn = new SqlConnection(Connection.SqlConnectionString))
+            using (IDbConnection conn = _provider.GetDbConnection())
             {
                 conn.Open();
                 return await conn.QueryAsync<T>(query);
@@ -54,15 +57,15 @@ namespace InventoryControlTRD.Infrastructure.Data.Core
         }
         public async Task<IEnumerable<T>> QueryAsync(string query, object obj)
         {
-            using (SqlConnection conn = new SqlConnection(Connection.SqlConnectionString))
+            using (IDbConnection conn = _provider.GetDbConnection())
             {
                 conn.Open();
-                return await conn.QueryAsync<T>(query,obj);
+                return await conn.QueryAsync<T>(query, obj);
             }
         }
         public async Task<T> QuerySingleAsync(string query, object obj)
         {
-            using (SqlConnection conn = new SqlConnection(Connection.SqlConnectionString))
+            using (IDbConnection conn = _provider.GetDbConnection())
             {
                 conn.Open();
                 return await conn.QueryFirstOrDefaultAsync<T>(query, obj);
@@ -71,25 +74,25 @@ namespace InventoryControlTRD.Infrastructure.Data.Core
 
         public IEnumerable<T> Query(string query, object obj)
         {
-            using (SqlConnection conn = new SqlConnection(Connection.SqlConnectionString))
+            using (IDbConnection conn = _provider.GetDbConnection())
             {
                 conn.Open();
                 return conn.Query<T>(query, obj);
             }
         }
 
-        public async Task<IEnumerable<T>> QueryAsync<X>(string query, Func<T,X,T> func)
+        public async Task<IEnumerable<T>> QueryAsync<X>(string query, Func<T, X, T> func)
         {
-            using (SqlConnection conn = new SqlConnection(Connection.SqlConnectionString))
+            using (IDbConnection conn = _provider.GetDbConnection())
             {
                 conn.Open();
-                return await conn.QueryAsync<T,X,T>(query, func);
+                return await conn.QueryAsync<T, X, T>(query, func);
             }
         }
 
         public async Task<IEnumerable<T>> QueryAsync<X>(string query, Func<T, X, T> func, object obj)
         {
-            using (SqlConnection conn = new SqlConnection(Connection.SqlConnectionString))
+            using (IDbConnection conn = _provider.GetDbConnection())
             {
                 conn.Open();
                 return await conn.QueryAsync<T, X, T>(query, func, param: obj, splitOn: "Id");
@@ -98,7 +101,7 @@ namespace InventoryControlTRD.Infrastructure.Data.Core
 
         public void ExecuteMultiple(string query, IEnumerable<object> objList)
         {
-            using (SqlConnection conn = new SqlConnection(Connection.SqlConnectionString))
+            using (IDbConnection conn = _provider.GetDbConnection())
             {
                 conn.Open();
                 conn.Execute(query, objList);

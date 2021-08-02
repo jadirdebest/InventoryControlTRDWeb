@@ -1,11 +1,8 @@
 ﻿using InventoryControlTRDWeb.Application.Dto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace InventoryControlTRDWeb.Areas.Client.Controllers
 {
@@ -42,9 +39,9 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
             SetSession(".listproduct", list);
         }
 
-        private void SetSession(string key,object obj)
+        private void SetSession(string key, object obj)
         {
-             base.HttpContext.Session.SetString(key,JsonSerializer.Serialize(obj));
+            base.HttpContext.Session.SetString(key, JsonSerializer.Serialize(obj));
         }
         private string GetSession(string key)
         {

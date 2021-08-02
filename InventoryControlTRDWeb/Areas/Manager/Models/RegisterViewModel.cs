@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace InventoryControlTRDWeb.Areas.Manager.Models
 {
@@ -16,7 +14,7 @@ namespace InventoryControlTRDWeb.Areas.Manager.Models
         { RoleList = roleList; RegisterList = registerList; }
 
         public RegisterViewModel(int id, int userId, string nickName, Guid? roleProfile, IEnumerable<RoleDto> roleList)
-        { Id = id; UserId = userId;  NickName = nickName; RoleProfile = roleProfile; RoleList = roleList; }
+        { Id = id; UserId = userId; NickName = nickName; RoleProfile = roleProfile; RoleList = roleList; }
 
         public int Id { get; set; }
         public int UserId { get; set; }

@@ -4,8 +4,6 @@ using InventoryControlTRDWeb.Areas.Client.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace InventoryControlTRDWeb.Areas.Client.Controllers
@@ -22,10 +20,10 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
             _appAccountService = appAccountService;
         }
 
-        public async Task<IActionResult> List() 
+        public async Task<IActionResult> List()
         {
             ViewBag.Role = "Administrator";
-            return View(new ProductListViewModel(await _productService.GetAllAsync())); 
+            return View(new ProductListViewModel(await _productService.GetAllAsync()));
         }
         public IActionResult Add() => View();
 
@@ -34,10 +32,10 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
         public IActionResult Add(ProductViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
-            
+
             try
             {
-                _productService.Save(new ProductDto(model.Id,model.Name,model.Composite,Decimal.Parse(model.CostPrice),Decimal.Parse(model.SalePrice),model.Active,model.Type));
+                _productService.Save(new ProductDto(model.Id, model.Name, model.Composite, Decimal.Parse(model.CostPrice), Decimal.Parse(model.SalePrice), model.Active, model.Type));
                 return RedirectToAction("List");
             }
             catch (Exception)
@@ -46,7 +44,7 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
             }
         }
 
-        public async Task<IActionResult> Details(Guid id) 
+        public async Task<IActionResult> Details(Guid id)
         {
             try
             {
@@ -64,7 +62,7 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
             try
             {
                 var product = await _productService.GetById(id);
-                return View(new ProductViewModel(product.Id,product.Actived,product.Name,product.Composite,product.CostPrice.ToString(),product.SalePrice.ToString(),product.Type));
+                return View(new ProductViewModel(product.Id, product.Actived, product.Name, product.Composite, product.CostPrice.ToString(), product.SalePrice.ToString(), product.Type));
             }
             catch (Exception)
             {

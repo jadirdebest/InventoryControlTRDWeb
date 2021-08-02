@@ -64,7 +64,7 @@ namespace InventoryControlTRD.Infrastructure.Data.Repositories
                                      Type = @Type,
                                      Actived = @Actived, 
                                      ModifiedOn = sysdatetime()
-                                 where Id = @Id", obj );
+                                 where Id = @Id", obj);
         }
     }
 }
