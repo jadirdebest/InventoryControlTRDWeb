@@ -23,6 +23,7 @@ namespace InventoryControlTRD.Infrastructure.Data.Repositories
                                     from Request xa 
                                     join RequestProduct xb on xa.Id = xb.Id
                                     join Product xc on xc.Id = xb.ProductId
+                                    where xa.Date between @StartDate and @FinalDate
                                     group by Name", 
                             new { StartDate = startDate, FinalDate = finalDate });
         }
@@ -37,13 +38,14 @@ namespace InventoryControlTRD.Infrastructure.Data.Repositories
                   join RequestProduct xb on xa.Id = xb.Id
                   join SubProduct xc on xc.ProductId = xb.ProductId
                   join Product xd on xd.Id = xc.SubProductId
+                  where xa.Date between @StartDate and @FinalDate
                   group by xd.Name
                 union
                 select xc.Name, Sum(xb.Amount) Amount, Sum(xb.SubTotalCostPrice) CostTotal, Sum(xb.SubTotalSalePrice) SaleTotal
                    from Request xa
                    join RequestProduct xb on xa.Id = xb.Id
                    join Product xc on xc.Id = xb.ProductId
-                   where xc.Composite = 0
+                   where xc.Composite = 0 and xa.Date between @StartDate and @FinalDate
                    group by xc.Name
               ) x group by x.Name
         ", new { StartDate = startDate, FinalDate = finalDate });
