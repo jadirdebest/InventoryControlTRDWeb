@@ -9,10 +9,12 @@
     <div class="form-group">
         <label>Data Inicial</label>
         <input asp-for="StartDate" type="date" class="form-control form-control-sm" />
+        <span asp-validation-for="StartDate" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label>Data Final</label>
-        <input asp-for="FinalDate"  type="date" class="form-control  form-control-sm" />
+        <input asp-for="FinalDate" type="date" class="form-control  form-control-sm" />
+        <span asp-validation-for="FinalDate" class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-primary">Gerar</button>

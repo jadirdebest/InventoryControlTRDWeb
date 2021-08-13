@@ -31,6 +31,7 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
         {
             try
             {
+                if (model.Amount < 1) return Ok(new { success = false, message = "Deve conter pelo menos 1 item." });
                 var product = await _productService.GetById(model.ProductId);
 
                 AddMovimentRequest(new RequestProductDto()

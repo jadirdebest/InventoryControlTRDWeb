@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace InventoryControlTRDWeb.Areas.Manager.Controllers
 {
     [Area("Manager")]
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Administrator,Manager")]
     public class AccountController : Controller
     {
         private readonly IAppAccountService _serviceAccount;

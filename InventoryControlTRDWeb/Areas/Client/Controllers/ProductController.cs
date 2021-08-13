@@ -1,4 +1,5 @@
-﻿using InventoryControlTRDWeb.Application.Dto;
+﻿using InventoryControlTRD.CrossCutting.Extensions;
+using InventoryControlTRDWeb.Application.Dto;
 using InventoryControlTRDWeb.Application.Interface;
 using InventoryControlTRDWeb.Areas.Client.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -22,7 +23,7 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
 
         public async Task<IActionResult> List()
         {
-            ViewBag.Role = "Administrator";
+            ViewBag.Role = User.Identity.GetRole();
             return View(new ProductListViewModel(await _productService.GetAllAsync()));
         }
         public IActionResult Add() => View();
@@ -79,7 +80,7 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
                 if (!ModelState.IsValid) return View(model);
                 _productService.Save(new ProductDto(model.Id, model.Name, model.Composite, Decimal.Parse(model.CostPrice), Decimal.Parse(model.SalePrice), model.Active, model.Type));
 
-                return View(model);
+                return RedirectToAction("List");
             }
             catch (Exception)
             {

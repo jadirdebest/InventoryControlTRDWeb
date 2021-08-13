@@ -10,28 +10,6 @@
 </div>
 
 
-@*<div class="row">
-    <div class="col-sm-3 col-md-3" style="font-weight:bold">Palavra - Chave</div>
-    <div class="col-sm-3 col-md-3" style="font-weight:bold">Data de Publicação Inicial</div>
-    <div class="col-sm-3 col-md-3" style="font-weight:bold">Data de Publicação Final</div>
-    <div class="col-sm-3 col-md-3" style="font-weight:bold">Ordenação dos Títulos</div>
-</div>
-<form asp-action="Books">
-    <div class="input-group">
-        <input asp-for="KeyWord" class="form-control" />
-        <input asp-for="InitialDate" type="date" class="form-control" />
-        <input asp-for="FinalDate" type="date" class="form-control" />
-        <select asp-for="OrderName" class="form-control">
-            <option value="A">A - Z</option>
-            <option value="Z">Z - A</option>
-        </select>
-        <div class="input-group-append">
-            <button class="btn btn-primary btn-flat" type="submit">Filtrar</button>
-        </div>
-    </div>
-</form>*@
-
-
 <table class="table" style="padding-top:3em">
     <thead>
         <tr>
@@ -56,7 +34,7 @@
                 </td>
               
                 <td>
-                    @if (ViewBag.Role == "Administrator")
+                    @if ( User.Identity.GetRole() == "Administrator" || User.Identity.GetUserName() == "Manager")
                     {
                         @Html.ActionLink("Editar", "Edit", new { id = item.Id });
                     }

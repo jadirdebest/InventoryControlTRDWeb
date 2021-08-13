@@ -68,8 +68,8 @@ namespace InventoryControlTRDWeb.Areas.Client.Controllers
                 {
                     switch (account.Role.Name)
                     {
-                        case "Manager": return Redirect("Manager/DashBoard/Home");
-                        case "Administrator": return Redirect("Manager/DashBoard/Home");
+                        case "Manager": return Redirect("/Manager/DashBoard/Home");
+                        case "Administrator": return Redirect("/Manager/DashBoard/Home");
                         default: return RedirectToAction("List", "Product");
                     }
                 }
